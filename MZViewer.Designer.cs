@@ -30,10 +30,10 @@ namespace Mytemize
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MZViewer));
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.colTickbox = new System.Windows.Forms.DataGridViewImageColumn();
@@ -45,8 +45,12 @@ namespace Mytemize
             this.pbProgress = new System.Windows.Forms.ProgressBar();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.trayIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.panelFooter = new System.Windows.Forms.Panel();
+            this.lblFooter = new System.Windows.Forms.Label();
+            this.btMini = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panelFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvList
@@ -54,11 +58,11 @@ namespace Mytemize
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
@@ -70,40 +74,40 @@ namespace Mytemize
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTickbox,
             this.colItems});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
             this.dgvList.Location = new System.Drawing.Point(12, 149);
             this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(10);
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft PhagsPa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft PhagsPa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvList.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
             this.dgvList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -157,17 +161,17 @@ namespace Mytemize
             this.btClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btClose.ForeColor = System.Drawing.Color.Transparent;
-            this.btClose.Location = new System.Drawing.Point(569, 2);
+            this.btClose.Location = new System.Drawing.Point(574, 5);
             this.btClose.Margin = new System.Windows.Forms.Padding(0);
-            this.btClose.MinimumSize = new System.Drawing.Size(30, 30);
+            this.btClose.MinimumSize = new System.Drawing.Size(20, 20);
             this.btClose.Name = "btClose";
-            this.btClose.Size = new System.Drawing.Size(30, 30);
+            this.btClose.Size = new System.Drawing.Size(20, 20);
             this.btClose.TabIndex = 7;
             this.btClose.UseVisualStyleBackColor = false;
-            this.btClose.Click += new System.EventHandler(this.btClose_click);
-            this.btClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btClose_mousedown);
-            this.btClose.MouseEnter += new System.EventHandler(this.btClose_mouseover);
-            this.btClose.MouseLeave += new System.EventHandler(this.btClose_mouseout);
+            this.btClose.Click += new System.EventHandler(this.button_click);
+            this.btClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_mousedown);
+            this.btClose.MouseEnter += new System.EventHandler(this.button_mouseover);
+            this.btClose.MouseLeave += new System.EventHandler(this.button_mouseout);
             // 
             // lbTitle
             // 
@@ -239,6 +243,48 @@ namespace Mytemize
             this.trayIcon1.Text = "Mytemize List";
             this.trayIcon1.Visible = true;
             // 
+            // panelFooter
+            // 
+            this.panelFooter.BackColor = System.Drawing.Color.Transparent;
+            this.panelFooter.Controls.Add(this.lblFooter);
+            this.panelFooter.Location = new System.Drawing.Point(12, 782);
+            this.panelFooter.Name = "panelFooter";
+            this.panelFooter.Size = new System.Drawing.Size(575, 18);
+            this.panelFooter.TabIndex = 11;
+            // 
+            // lblFooter
+            // 
+            this.lblFooter.AutoSize = true;
+            this.lblFooter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFooter.ForeColor = System.Drawing.Color.MediumAquamarine;
+            this.lblFooter.Location = new System.Drawing.Point(0, 0);
+            this.lblFooter.Name = "lblFooter";
+            this.lblFooter.Size = new System.Drawing.Size(117, 13);
+            this.lblFooter.TabIndex = 0;
+            this.lblFooter.Text = "Bitknvs Studio © 2024 ";
+            this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btMini
+            // 
+            this.btMini.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btMini.BackgroundImage = global::Mytemize.Properties.Resources.min_button;
+            this.btMini.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btMini.FlatAppearance.BorderSize = 0;
+            this.btMini.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btMini.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMini.ForeColor = System.Drawing.Color.Transparent;
+            this.btMini.Location = new System.Drawing.Point(549, 5);
+            this.btMini.Margin = new System.Windows.Forms.Padding(0);
+            this.btMini.MinimumSize = new System.Drawing.Size(20, 20);
+            this.btMini.Name = "btMini";
+            this.btMini.Size = new System.Drawing.Size(20, 20);
+            this.btMini.TabIndex = 12;
+            this.btMini.UseVisualStyleBackColor = false;
+            this.btMini.Click += new System.EventHandler(this.button_click);
+            this.btMini.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_mousedown);
+            this.btMini.MouseEnter += new System.EventHandler(this.button_mouseover);
+            this.btMini.MouseLeave += new System.EventHandler(this.button_mouseout);
+            // 
             // MZViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,6 +292,8 @@ namespace Mytemize
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.BackgroundImage = global::Mytemize.Properties.Resources.myzViewerBG;
             this.ClientSize = new System.Drawing.Size(600, 800);
+            this.Controls.Add(this.btMini);
+            this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.pbProgress);
             this.Controls.Add(this.dgvList);
@@ -264,6 +312,8 @@ namespace Mytemize
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelFooter.ResumeLayout(false);
+            this.panelFooter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -279,5 +329,8 @@ namespace Mytemize
         private System.Windows.Forms.DataGridViewImageColumn colTickbox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItems;
         private System.Windows.Forms.NotifyIcon trayIcon1;
+        private System.Windows.Forms.Panel panelFooter;
+        private System.Windows.Forms.Label lblFooter;
+        private System.Windows.Forms.Button btMini;
     }
 }

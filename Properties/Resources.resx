@@ -142,6 +142,15 @@
   <data name="close_button_highlighted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\close_button_highlighted.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="min_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\min_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="min_button_clicked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\min_button_clicked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="min_button_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\min_button_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="myzViewerBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\myzviewerbg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

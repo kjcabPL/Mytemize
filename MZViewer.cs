@@ -20,10 +20,12 @@ namespace Mytemize
     {
         const string COL_ITEM = "colItems", COL_BUTTON = "colTickbox";
 
-        //image assets for the click boxes
+        // styles for the DGV cells
         DataGridViewCellStyle cstyleIncomplete, cstyleComplete, cstylePartial, cstyleLate;
+
+        // image resources
         Image imgIncomplete, imgHover, imgPartial, imgComplete, imgLate, prevImage, imgWindowBG;
-        Image imgBtClose, imgBtCloseHover, imgBtCloseClicked;
+        Image imgBtClose, imgBtCloseHover, imgBtCloseClicked, imgBtMini, imgBtMiniHover, imgBtMiniClicked;
 
         internal MZList activeFile;
         string currentPath = null;
@@ -67,6 +69,9 @@ namespace Mytemize
             imgBtClose = loadEmbeddedImage("Mytemize.Resources.close_button.bmp");
             imgBtCloseHover = loadEmbeddedImage("Mytemize.Resources.close_button_highlighted.bmp");
             imgBtCloseClicked = loadEmbeddedImage("Mytemize.Resources.close_button_clicked.bmp");
+            imgBtMini = loadEmbeddedImage("Mytemize.Resources.min_button.png");
+            imgBtMiniHover = loadEmbeddedImage("Mytemize.Resources.min_button_hover.png");
+            imgBtMiniClicked = loadEmbeddedImage("Mytemize.Resources.min_button_clicked.png");
 
             // prepare styles
             cstyleIncomplete = new DataGridViewCellStyle();
@@ -104,26 +109,6 @@ namespace Mytemize
         /*
          * Button and Control Operations
          */
-
-        private void btClose_click(Object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btClose_mouseover(Object sender, EventArgs e)
-        {
-            btClose.BackgroundImage = imgBtCloseHover;
-        }
-
-        private void btClose_mouseout(Object sender, EventArgs e)
-        {
-            btClose.BackgroundImage = imgBtClose;
-        }
-
-        private void btClose_mousedown(Object sender, MouseEventArgs e)
-        {
-            btClose.BackgroundImage = imgBtCloseClicked;
-        }
 
         // do when user mouseovers on a cell
         private void dgvCellContent_mouseenter(object sender, DataGridViewCellEventArgs e)
@@ -227,8 +212,34 @@ namespace Mytemize
             }
         }
 
+        // button animations & behaviors
+        private void button_click(Object sender, EventArgs e)
+        {
+            Button bt = sender as Button;
+            if (bt == btClose) this.Close();
+            if (bt == btMini) this.WindowState = FormWindowState.Minimized;
+        }
 
+        private void button_mouseover(Object sender, EventArgs e)
+        {
+            Button bt = sender as Button;
+            if (bt == btClose) btClose.BackgroundImage = imgBtCloseHover;
+            if (bt == btMini) btMini.BackgroundImage = imgBtMiniHover;
+        }
 
+        private void button_mouseout(Object sender, EventArgs e)
+        {
+            Button bt = sender as Button;
+            if (bt == btClose) btClose.BackgroundImage = imgBtClose;
+            if (bt == btMini) btMini.BackgroundImage = imgBtMini;
+        }
+
+        private void button_mousedown(Object sender, MouseEventArgs e)
+        {
+            Button bt = sender as Button;
+            if (bt == btClose) btClose.BackgroundImage = imgBtCloseClicked;
+            if (bt == btMini) btMini.BackgroundImage = imgBtMiniClicked;
+        }
 
         /*
          * File operations
