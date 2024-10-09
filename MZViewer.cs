@@ -30,7 +30,7 @@ namespace Mytemize
         internal MZList activeFile;
         string currentPath = null;
 
-        bool isDemo = false,  isDragging = false;
+        bool isDemo = false,  isDragging = false, minimizeToTray = false;
         Point ptDragCursor, ptDragForm;
         
         public MZViewer(string filePath = null, bool demo = false)
@@ -69,9 +69,9 @@ namespace Mytemize
             imgBtClose = loadEmbeddedImage("Mytemize.Resources.close_button.bmp");
             imgBtCloseHover = loadEmbeddedImage("Mytemize.Resources.close_button_highlighted.bmp");
             imgBtCloseClicked = loadEmbeddedImage("Mytemize.Resources.close_button_clicked.bmp");
-            imgBtMini = loadEmbeddedImage("Mytemize.Resources.min_button.png");
-            imgBtMiniHover = loadEmbeddedImage("Mytemize.Resources.min_button_hover.png");
-            imgBtMiniClicked = loadEmbeddedImage("Mytemize.Resources.min_button_clicked.png");
+            imgBtMini = loadEmbeddedImage("Mytemize.Resources.min_button.bmp");
+            imgBtMiniHover = loadEmbeddedImage("Mytemize.Resources.min_button_hover.bmp");
+            imgBtMiniClicked = loadEmbeddedImage("Mytemize.Resources.min_button_clicked.bmp");
 
             // prepare styles
             cstyleIncomplete = new DataGridViewCellStyle();
