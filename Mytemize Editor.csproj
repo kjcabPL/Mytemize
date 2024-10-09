@@ -187,6 +187,15 @@
     <Content Include="Resources\icons\myz_icon_256x256.ico" />
     <Content Include="Resources\icons\myz_icon_32x32.ico" />
     <Content Include="Resources\icons\myz_icon_480x480.ico" />
+    <EmbeddedResource Include="Resources\setting_button.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\setting_button_clicked.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\setting_button_hover.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\min_button.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

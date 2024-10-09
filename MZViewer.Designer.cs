@@ -30,10 +30,10 @@ namespace Mytemize
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MZViewer));
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.colTickbox = new System.Windows.Forms.DataGridViewImageColumn();
@@ -41,6 +41,7 @@ namespace Mytemize
             this.btClose = new System.Windows.Forms.Button();
             this.lbTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblProgress = new System.Windows.Forms.Label();
             this.lblDemoOnly = new System.Windows.Forms.Label();
             this.pbProgress = new System.Windows.Forms.ProgressBar();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -48,7 +49,7 @@ namespace Mytemize
             this.panelFooter = new System.Windows.Forms.Panel();
             this.lblFooter = new System.Windows.Forms.Label();
             this.btMini = new System.Windows.Forms.Button();
-            this.lblProgress = new System.Windows.Forms.Label();
+            this.btSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelFooter.SuspendLayout();
@@ -59,11 +60,11 @@ namespace Mytemize
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
@@ -75,40 +76,40 @@ namespace Mytemize
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTickbox,
             this.colItems});
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
             this.dgvList.Location = new System.Drawing.Point(13, 149);
             this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(10);
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft PhagsPa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft PhagsPa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvList.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(43)))));
             this.dgvList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -202,6 +203,20 @@ namespace Mytemize
             this.panel1.Size = new System.Drawing.Size(579, 71);
             this.panel1.TabIndex = 9;
             // 
+            // lblProgress
+            // 
+            this.lblProgress.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblProgress.BackColor = System.Drawing.Color.Transparent;
+            this.lblProgress.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProgress.ForeColor = System.Drawing.Color.PaleGreen;
+            this.lblProgress.Location = new System.Drawing.Point(2, 43);
+            this.lblProgress.MinimumSize = new System.Drawing.Size(575, 0);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(575, 19);
+            this.lblProgress.TabIndex = 9;
+            this.lblProgress.Text = "0 / 0";
+            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblDemoOnly
             // 
             this.lblDemoOnly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -285,19 +300,25 @@ namespace Mytemize
             this.btMini.MouseEnter += new System.EventHandler(this.button_mouseover);
             this.btMini.MouseLeave += new System.EventHandler(this.button_mouseout);
             // 
-            // lblProgress
+            // btSettings
             // 
-            this.lblProgress.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblProgress.BackColor = System.Drawing.Color.Transparent;
-            this.lblProgress.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgress.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblProgress.Location = new System.Drawing.Point(2, 50);
-            this.lblProgress.MinimumSize = new System.Drawing.Size(575, 0);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(575, 19);
-            this.lblProgress.TabIndex = 9;
-            this.lblProgress.Text = "0 / 0";
-            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btSettings.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btSettings.BackgroundImage = global::Mytemize.Properties.Resources.setting_button;
+            this.btSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btSettings.FlatAppearance.BorderSize = 0;
+            this.btSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSettings.ForeColor = System.Drawing.Color.Transparent;
+            this.btSettings.Location = new System.Drawing.Point(522, 5);
+            this.btSettings.Margin = new System.Windows.Forms.Padding(0);
+            this.btSettings.MinimumSize = new System.Drawing.Size(20, 20);
+            this.btSettings.Name = "btSettings";
+            this.btSettings.Size = new System.Drawing.Size(20, 20);
+            this.btSettings.TabIndex = 13;
+            this.btSettings.UseVisualStyleBackColor = false;
+            this.btSettings.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_mousedown);
+            this.btSettings.MouseEnter += new System.EventHandler(this.button_mouseover);
+            this.btSettings.MouseLeave += new System.EventHandler(this.button_mouseout);
             // 
             // MZViewer
             // 
@@ -306,6 +327,7 @@ namespace Mytemize
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.BackgroundImage = global::Mytemize.Properties.Resources.myzViewerBG;
             this.ClientSize = new System.Drawing.Size(600, 800);
+            this.Controls.Add(this.btSettings);
             this.Controls.Add(this.btMini);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.btClose);
@@ -349,5 +371,6 @@ namespace Mytemize
         private System.Windows.Forms.Label lblFooter;
         private System.Windows.Forms.Button btMini;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Button btSettings;
     }
 }

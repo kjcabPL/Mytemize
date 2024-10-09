@@ -26,11 +26,12 @@ namespace Mytemize
         // image resources
         Image imgIncomplete, imgHover, imgPartial, imgComplete, imgLate, prevImage, imgWindowBG;
         Image imgBtClose, imgBtCloseHover, imgBtCloseClicked, imgBtMini, imgBtMiniHover, imgBtMiniClicked;
+        Image[] imgBtSettings;
 
         internal MZList activeFile;
         string currentPath = null;
 
-        bool isDemo = false,  isDragging = false, minimizeToTray = false;
+        bool isDemo = false,  isDragging = false, minimizeToTray = false, showProgressBar = true;
         Point ptDragCursor, ptDragForm;
         
         public MZViewer(string filePath = null, bool demo = false)
@@ -72,6 +73,10 @@ namespace Mytemize
             imgBtMini = loadEmbeddedImage("Mytemize.Resources.min_button.bmp");
             imgBtMiniHover = loadEmbeddedImage("Mytemize.Resources.min_button_hover.bmp");
             imgBtMiniClicked = loadEmbeddedImage("Mytemize.Resources.min_button_clicked.bmp");
+            imgBtSettings = new Image[3];
+            imgBtSettings[0]= loadEmbeddedImage("Mytemize.Resources.setting_button.bmp");
+            imgBtSettings[1] = loadEmbeddedImage("Mytemize.Resources.setting_button_hover.bmp");
+            imgBtSettings[2] = loadEmbeddedImage("Mytemize.Resources.setting_button_clicked.bmp");
 
             // prepare styles
             cstyleIncomplete = new DataGridViewCellStyle();
@@ -218,6 +223,7 @@ namespace Mytemize
             Button bt = sender as Button;
             if (bt == btClose) this.Close();
             if (bt == btMini) this.WindowState = FormWindowState.Minimized;
+            
         }
 
         private void button_mouseover(Object sender, EventArgs e)
@@ -225,6 +231,7 @@ namespace Mytemize
             Button bt = sender as Button;
             if (bt == btClose) btClose.BackgroundImage = imgBtCloseHover;
             if (bt == btMini) btMini.BackgroundImage = imgBtMiniHover;
+            if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[1];
         }
 
         private void button_mouseout(Object sender, EventArgs e)
@@ -232,6 +239,7 @@ namespace Mytemize
             Button bt = sender as Button;
             if (bt == btClose) btClose.BackgroundImage = imgBtClose;
             if (bt == btMini) btMini.BackgroundImage = imgBtMini;
+            if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[0];
         }
 
         private void button_mousedown(Object sender, MouseEventArgs e)
@@ -239,6 +247,7 @@ namespace Mytemize
             Button bt = sender as Button;
             if (bt == btClose) btClose.BackgroundImage = imgBtCloseClicked;
             if (bt == btMini) btMini.BackgroundImage = imgBtMiniClicked;
+            if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[2];
         }
 
         /*
