@@ -47,6 +47,7 @@ namespace Mytemize
             if (filePath != null && filePath != "") {
                 currentPath = filePath;
                 readFilePath();
+                updateWindowInfo();
             }
         }
 
@@ -55,6 +56,7 @@ namespace Mytemize
             activeFile = file;
             clearAllRows();
             openFile();
+            updateWindowInfo();
         }
 
         // load resources and prepare styles here
@@ -222,7 +224,19 @@ namespace Mytemize
         {
             Button bt = sender as Button;
             if (bt == btClose) this.Close();
-            if (bt == btMini) this.WindowState = FormWindowState.Minimized;
+            if (bt == btMini) {
+                this.WindowState = FormWindowState.Minimized;
+                if (minimizeToTray && this.WindowState == FormWindowState.Minimized)
+                {
+                    trayIcon1.Visible = true;
+                    this.Hide();
+                }
+                else
+                {
+                    trayIcon1.Visible = true;
+                }
+            }
+            if (bt == btSettings) openSettingsWindow();
             
         }
 
@@ -283,6 +297,7 @@ namespace Mytemize
                             }
                         }
                         updateProgress();
+                        
                     }
 
                 }
@@ -383,11 +398,43 @@ namespace Mytemize
             dgvList.Rows.Clear();
         }
 
+        // Update window information
+        private void updateWindowInfo()
+        {
+            lbTitle.Text = activeFile.Title;
+            trayIcon1.Text = "Mytemize List | " + activeFile.Title;
+            
+            // update list settings as well
+            if (!showProgressBar) pbProgress.Visible = false;
+            else pbProgress.Visible = true;
+        }
+
         // update the progress bar as needed
         private void updateProgress()
         {
             // cast to int because progress bar's value only allows integers. Ensures the cap is 100
             pbProgress.Value = (int) Math.Min(Math.Round(activeFile.checkProgress(), MidpointRounding.AwayFromZero), 100);
+            lblProgress.Text = activeFile.checkCompletedEntries().ToString() + " out of  " + activeFile.Count.ToString();
+        }
+
+        // Opens the settings window
+        private void openSettingsWindow()
+        {
+            MZViewerSettings settings = new MZViewerSettings(showProgressBar, minimizeToTray);
+
+            if (settings.ShowDialog() == DialogResult.OK)
+            {
+                showProgressBar = settings.isDisplayPB;
+                minimizeToTray = settings.isMinToTray;
+            }
+            updateWindowInfo();
+        }
+
+        // Display the window from the tray Icon when minimized
+        private void trayIcon_showWindowFromTray(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
 
         // use to check if the entry is already late if it's a scheduled Entry

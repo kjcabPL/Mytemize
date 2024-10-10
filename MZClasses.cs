@@ -215,10 +215,26 @@ namespace Mytemize
                 if (items[i].State == RecordState.COMPLETE) done++;
             }
 
-         
             // Math.Max ensures we don't get 0 on lists with only one entry
             return 100 * done / Math.Max(1, (items.Count));
         }
-        
+
+        // return how many entries have been completed
+        public int checkCompletedEntries()
+        {
+            if (items.Count <= 0) return 0; // return full count if there are no entries because why would there be any progress on it?
+
+            int done = 0;
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                // only consider complete states as "done" - partial and incomplete should still be inc
+                if (items[i].State == RecordState.COMPLETE) done++;
+            }
+
+            // Math.Max ensures we don't get 0 on lists with only one entry
+            return done;
+        }
+
     }
 }
