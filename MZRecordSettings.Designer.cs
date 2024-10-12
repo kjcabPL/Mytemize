@@ -85,6 +85,7 @@ namespace Mytemize
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.dpDatePicker);
             this.panel1.Controls.Add(this.cbScheduled);
             this.panel1.Controls.Add(this.cbIncludePartial);
@@ -118,6 +119,7 @@ namespace Mytemize
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.lblRecordName);
             this.panel2.Location = new System.Drawing.Point(12, 13);
             this.panel2.Name = "panel2";
