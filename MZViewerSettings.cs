@@ -12,20 +12,44 @@ namespace Mytemize
 {
     public partial class MZViewerSettings : Form
     {
-        public bool isDisplayPB = true, isMinToTray = false;
+        public bool isDisplayPB = true, isMinToTray = false, isPinToDesktop = false;
 
-        public MZViewerSettings(bool displayPB, bool minToTray)
+        public MZViewerSettings(bool displayPB, bool minToTray, bool pinToDesktop = false)
         {
             isDisplayPB = displayPB;
             isMinToTray = minToTray;
+            
+            // If minimize to tray is enabled, disable pinToDesktop by default
+            if (!isMinToTray) isPinToDesktop = pinToDesktop;
+
             InitializeComponent();
             setupOptions();
+        }
+
+        private void cb_Click(Object sender, EventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            if (cb == cbMinToTray)
+            {
+                // disable pin to desktop by default if minimize to tray is enabled
+                if (cb.Checked) {
+                    cbPinToDesktop.Checked = false;
+                    cbPinToDesktop.Enabled = false;
+                }
+                else
+                {
+                    cbPinToDesktop.Enabled = true;
+                }
+            }
         }
 
         private void setupOptions()
         {
             cbEnablePBar.Checked = isDisplayPB;
             cbMinToTray.Checked = isMinToTray;
+            cbPinToDesktop.Checked = isPinToDesktop;
+
+            if (isMinToTray) cbPinToDesktop.Enabled = false;
         }
 
         private void button_clicked(object sender, EventArgs e)
@@ -35,8 +59,8 @@ namespace Mytemize
             {
                 isDisplayPB = cbEnablePBar.Checked;
                 isMinToTray = cbMinToTray.Checked;
+                isPinToDesktop = cbPinToDesktop.Checked;
                 this.DialogResult = DialogResult.OK;
-                
             }
             else if (bt == btCancel)
             {

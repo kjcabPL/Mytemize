@@ -31,7 +31,7 @@ namespace Mytemize
         internal MZList activeFile;
         string currentPath = null;
 
-        bool isDemo = false,  isDragging = false, minimizeToTray = false, showProgressBar = true;
+        bool isDemo = false, isDragging = false, minimizeToTray = false, showProgressBar = true, pinToDesktop = false;
         Point ptDragCursor, ptDragForm;
         
         public MZViewer(string filePath = null, bool demo = false)
@@ -407,6 +407,9 @@ namespace Mytemize
             // update list settings as well
             if (!showProgressBar) pbProgress.Visible = false;
             else pbProgress.Visible = true;
+
+            // disable minimize button if pinToDesktop is enabled and vice versa
+            btMini.Enabled = !pinToDesktop;
         }
 
         // update the progress bar as needed
@@ -420,12 +423,13 @@ namespace Mytemize
         // Opens the settings window
         private void openSettingsWindow()
         {
-            MZViewerSettings settings = new MZViewerSettings(showProgressBar, minimizeToTray);
+            MZViewerSettings settings = new MZViewerSettings(showProgressBar, minimizeToTray, pinToDesktop);
 
             if (settings.ShowDialog() == DialogResult.OK)
             {
                 showProgressBar = settings.isDisplayPB;
                 minimizeToTray = settings.isMinToTray;
+                pinToDesktop = settings.isPinToDesktop;
             }
             updateWindowInfo();
         }
