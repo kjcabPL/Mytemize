@@ -402,7 +402,7 @@ namespace Mytemize
         private void updateWindowInfo()
         {
             lbTitle.Text = activeFile.Title;
-            trayIcon1.Text = "Mytemize List | " + activeFile.Title;
+            trayIcon1.Text = "Mytemize | " + activeFile.Title;
             
             // update list settings as well
             if (!showProgressBar) pbProgress.Visible = false;

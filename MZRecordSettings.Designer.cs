@@ -76,16 +76,18 @@ namespace Mytemize
             // lblRecordName
             // 
             this.lblRecordName.AutoSize = true;
-            this.lblRecordName.Location = new System.Drawing.Point(19, 9);
+            this.lblRecordName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecordName.Location = new System.Drawing.Point(0, 9);
+            this.lblRecordName.MinimumSize = new System.Drawing.Size(269, 0);
             this.lblRecordName.Name = "lblRecordName";
-            this.lblRecordName.Size = new System.Drawing.Size(10, 13);
+            this.lblRecordName.Size = new System.Drawing.Size(269, 16);
             this.lblRecordName.TabIndex = 3;
             this.lblRecordName.Text = "-";
             this.lblRecordName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.panel1.Controls.Add(this.dpDatePicker);
             this.panel1.Controls.Add(this.cbScheduled);
             this.panel1.Controls.Add(this.cbIncludePartial);
@@ -111,15 +113,15 @@ namespace Mytemize
             this.cbScheduled.AutoSize = true;
             this.cbScheduled.Location = new System.Drawing.Point(22, 40);
             this.cbScheduled.Name = "cbScheduled";
-            this.cbScheduled.Size = new System.Drawing.Size(93, 17);
+            this.cbScheduled.Size = new System.Drawing.Size(108, 17);
             this.cbScheduled.TabIndex = 3;
-            this.cbScheduled.Text = "Has Schedule";
+            this.cbScheduled.Text = "Item is scheduled";
             this.cbScheduled.UseVisualStyleBackColor = true;
             this.cbScheduled.Click += new System.EventHandler(this.cbScheduled_click);
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.panel2.Controls.Add(this.lblRecordName);
             this.panel2.Location = new System.Drawing.Point(12, 13);
             this.panel2.Name = "panel2";
@@ -130,6 +132,7 @@ namespace Mytemize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaGreen;
             this.ClientSize = new System.Drawing.Size(294, 341);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -141,6 +144,7 @@ namespace Mytemize
             this.MinimumSize = new System.Drawing.Size(310, 380);
             this.Name = "MZRecordSettings";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Item Options";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

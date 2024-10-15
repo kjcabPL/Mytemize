@@ -63,6 +63,16 @@ namespace Mytemize.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_button {
+            get {
+                object obj = ResourceManager.GetObject("add_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap clickbox_complete {
             get {
                 object obj = ResourceManager.GetObject("clickbox_complete", resourceCulture);

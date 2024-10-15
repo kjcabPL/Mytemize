@@ -68,8 +68,8 @@ namespace Mytemize
          */
         private void setUpQuestions()
         {
-            this.Text = "Options for [ " + description + " ] ";
-            lblRecordName.Text = "[ " + description + " ] Settings:";
+            this.Text = "Options for " + description + " ";
+            lblRecordName.Text = description + " Settings:";
             cbIncludePartial.Checked = allowPartial;
             cbScheduled.Checked = isScheduled;
             if (isScheduled)

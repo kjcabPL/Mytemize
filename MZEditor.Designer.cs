@@ -146,11 +146,11 @@ namespace Mytemize
             // 
             this.tbNewItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNewItem.Location = new System.Drawing.Point(67, 3);
+            this.tbNewItem.Location = new System.Drawing.Point(53, 3);
             this.tbNewItem.Multiline = true;
             this.tbNewItem.Name = "tbNewItem";
             this.tbNewItem.ReadOnly = true;
-            this.tbNewItem.Size = new System.Drawing.Size(692, 45);
+            this.tbNewItem.Size = new System.Drawing.Size(706, 45);
             this.tbNewItem.TabIndex = 1;
             this.tbNewItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbNewItem.Click += new System.EventHandler(this.tbEnable);
@@ -161,13 +161,15 @@ namespace Mytemize
             // btAddItem
             // 
             this.btAddItem.BackColor = System.Drawing.Color.PaleGreen;
-            this.btAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btAddItem.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAddItem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btAddItem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAddItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAddItem.Image = global::Mytemize.Properties.Resources.add_button;
             this.btAddItem.Location = new System.Drawing.Point(2, 3);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(55, 45);
+            this.btAddItem.Size = new System.Drawing.Size(45, 45);
             this.btAddItem.TabIndex = 0;
-            this.btAddItem.Text = "Add";
             this.btAddItem.UseVisualStyleBackColor = false;
             this.btAddItem.Click += new System.EventHandler(this.btAddRecord);
             // 
@@ -183,7 +185,7 @@ namespace Mytemize
             // panel2
             // 
             this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.SystemColors.GrayText;
+            this.panel2.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.panel2.Controls.Add(this.dgRecordsView);
             this.panel2.Location = new System.Drawing.Point(12, 71);
             this.panel2.Name = "panel2";
@@ -241,15 +243,17 @@ namespace Mytemize
             // 
             // tbTitle
             // 
-            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
-            this.tbTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
+            this.tbTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbTitle.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tbTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbTitle.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
-            this.tbTitle.Location = new System.Drawing.Point(12, 29);
+            this.tbTitle.Location = new System.Drawing.Point(0, 24);
+            this.tbTitle.MaxLength = 52;
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(762, 39);
+            this.tbTitle.Size = new System.Drawing.Size(784, 32);
             this.tbTitle.TabIndex = 4;
             this.tbTitle.Text = "Mytemize Checklist Title";
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -269,7 +273,7 @@ namespace Mytemize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SeaGreen;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.panel2);

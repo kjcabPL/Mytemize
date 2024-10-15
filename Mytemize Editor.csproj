@@ -192,6 +192,9 @@
   <ItemGroup>
     <Content Include="myz_icon_32x32.ico" />
     <Content Include="myz_icon_480x480.ico" />
+    <Content Include="Resources\add_button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icons\myzv_icon_200x256.ico" />
     <Content Include="Resources\icons\myz_icon_256x256.ico" />
     <Content Include="Resources\icons\myz_icon_32x32.ico" />
