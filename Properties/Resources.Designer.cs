@@ -213,6 +213,26 @@ namespace Mytemize.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap myzEditorBG1 {
+            get {
+                object obj = ResourceManager.GetObject("myzEditorBG1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap myzEditorBG2 {
+            get {
+                object obj = ResourceManager.GetObject("myzEditorBG2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap myzViewerBG {
             get {
                 object obj = ResourceManager.GetObject("myzViewerBG", resourceCulture);

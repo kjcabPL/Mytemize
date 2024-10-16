@@ -98,6 +98,7 @@ namespace Mytemize
             // 
             // dpDatePicker
             // 
+            this.dpDatePicker.BackColor = System.Drawing.SystemColors.Window;
             this.dpDatePicker.Enabled = false;
             this.dpDatePicker.Location = new System.Drawing.Point(22, 69);
             this.dpDatePicker.MaxSelectionCount = 1;

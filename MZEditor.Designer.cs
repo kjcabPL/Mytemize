@@ -150,7 +150,7 @@ namespace Mytemize
             this.tbNewItem.Multiline = true;
             this.tbNewItem.Name = "tbNewItem";
             this.tbNewItem.ReadOnly = true;
-            this.tbNewItem.Size = new System.Drawing.Size(706, 45);
+            this.tbNewItem.Size = new System.Drawing.Size(711, 45);
             this.tbNewItem.TabIndex = 1;
             this.tbNewItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbNewItem.Click += new System.EventHandler(this.tbEnable);
@@ -175,6 +175,7 @@ namespace Mytemize
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.btAddItem);
             this.panel1.Controls.Add(this.tbNewItem);
             this.panel1.Location = new System.Drawing.Point(12, 505);
@@ -185,7 +186,7 @@ namespace Mytemize
             // panel2
             // 
             this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(139)))), ((int)(((byte)(115)))));
             this.panel2.Controls.Add(this.dgRecordsView);
             this.panel2.Location = new System.Drawing.Point(12, 71);
             this.panel2.Name = "panel2";
@@ -274,6 +275,8 @@ namespace Mytemize
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
+            this.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG2;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.panel2);

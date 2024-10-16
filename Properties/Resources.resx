@@ -154,6 +154,12 @@
   <data name="min_button_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\min_button_hover.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="myzEditorBG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\myzeditorbg1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="myzEditorBG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\myzeditorbg2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="myzViewerBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\myzviewerbg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
