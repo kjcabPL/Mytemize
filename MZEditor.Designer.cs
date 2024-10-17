@@ -37,6 +37,10 @@ namespace Mytemize
             this.menuStrip_FileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_FileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_FileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openListInViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +83,9 @@ namespace Mytemize
             this.menuStrip_FileNew,
             this.menuStrip_FileOpen,
             this.menuStrip_FileSave,
-            this.menuStrip_FileSaveAs});
+            this.menuStrip_FileSaveAs,
+            this.toolStripSeparator1,
+            this.importToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -87,30 +93,57 @@ namespace Mytemize
             // menuStrip_FileNew
             // 
             this.menuStrip_FileNew.Name = "menuStrip_FileNew";
-            this.menuStrip_FileNew.Size = new System.Drawing.Size(124, 22);
+            this.menuStrip_FileNew.Size = new System.Drawing.Size(180, 22);
             this.menuStrip_FileNew.Text = "New List";
             this.menuStrip_FileNew.Click += new System.EventHandler(this.menuNewFile);
             // 
             // menuStrip_FileOpen
             // 
             this.menuStrip_FileOpen.Name = "menuStrip_FileOpen";
-            this.menuStrip_FileOpen.Size = new System.Drawing.Size(124, 22);
+            this.menuStrip_FileOpen.Size = new System.Drawing.Size(180, 22);
             this.menuStrip_FileOpen.Text = "Open List";
             this.menuStrip_FileOpen.Click += new System.EventHandler(this.menuOpenFile);
             // 
             // menuStrip_FileSave
             // 
             this.menuStrip_FileSave.Name = "menuStrip_FileSave";
-            this.menuStrip_FileSave.Size = new System.Drawing.Size(124, 22);
+            this.menuStrip_FileSave.Size = new System.Drawing.Size(180, 22);
             this.menuStrip_FileSave.Text = "Save List";
             this.menuStrip_FileSave.Click += new System.EventHandler(this.menuSaveFile);
             // 
             // menuStrip_FileSaveAs
             // 
             this.menuStrip_FileSaveAs.Name = "menuStrip_FileSaveAs";
-            this.menuStrip_FileSaveAs.Size = new System.Drawing.Size(124, 22);
+            this.menuStrip_FileSaveAs.Size = new System.Drawing.Size(180, 22);
             this.menuStrip_FileSaveAs.Text = "Save As...";
             this.menuStrip_FileSaveAs.Click += new System.EventHandler(this.menuSaveAsFile);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cSVToolStripMenuItem,
+            this.xLSToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            // 
+            // cSVToolStripMenuItem
+            // 
+            this.cSVToolStripMenuItem.Name = "cSVToolStripMenuItem";
+            this.cSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cSVToolStripMenuItem.Text = "CSV";
+            this.cSVToolStripMenuItem.Click += new System.EventHandler(this.menuImportCSV);
+            // 
+            // xLSToolStripMenuItem
+            // 
+            this.xLSToolStripMenuItem.Name = "xLSToolStripMenuItem";
+            this.xLSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xLSToolStripMenuItem.Text = "XLS";
             // 
             // editToolStripMenuItem
             // 
@@ -328,6 +361,10 @@ namespace Mytemize
         private System.Windows.Forms.ToolStripMenuItem openListInViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xLSToolStripMenuItem;
     }
 }
 

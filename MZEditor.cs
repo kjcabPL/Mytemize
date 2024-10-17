@@ -7,9 +7,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 
 namespace Mytemize
@@ -19,6 +22,7 @@ namespace Mytemize
         const string PLACEHOLDER_TITLE = "Checklist Title";
         const string PLACEHOLDER_ITEM = "New List Item";
         const string COL_REMOVE = "colRemove", COL_OPTIONS = "colOptions", COL_DESCRIPTION = "colDescription";
+        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$";
 
         // only have one file opened at a time to prevent complications
         internal MZList activeFile;
@@ -197,13 +201,7 @@ namespace Mytemize
         // Do on menu "open list" is clicked
         private void menuOpenFile(object sender, EventArgs e)
         {
-            if (isDirty)
-            {
-                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    menuSaveFile(sender, e);
-                }
-            }
+            checkIfDirty(sender, e);
 
             OpenFileDialog openFileDG = new OpenFileDialog();
             openFileDG.Filter = "Mytemize Files (*.myz)|*.myz|All files (*.*)|*.*";
@@ -237,6 +235,25 @@ namespace Mytemize
             {
                 saveFile(currentFilePath);
             }
+        }
+
+        // Import menus
+        private void menuImportCSV(object sender, EventArgs e)
+        {
+            checkIfDirty(sender, e);
+            
+            // first, open a dialog to the CSV to import
+            OpenFileDialog openFileDG = new OpenFileDialog();
+            openFileDG.Filter = "Comma-separated value files (*.csv) | *.csv";
+            openFileDG.Title = "Import CSV as list";
+
+            if (openFileDG.ShowDialog() == DialogResult.OK)
+            {
+                // then open a stream to the file
+                string filePath = openFileDG.FileName;
+                importFile(filePath, FILETYPE_CSV);
+            }
+
         }
 
         private void menuSaveAsFile(object sender, EventArgs e)
@@ -293,6 +310,7 @@ namespace Mytemize
             isDirty = false;
         }
 
+        // Open a file for editing
         private void openFile(string filePath)
         {
             currentFilePath = filePath;
@@ -313,16 +331,11 @@ namespace Mytemize
                         for (int i = 0; i <= activeFile.Count; i++)
                         {
                             MZRecord record = activeFile.getRecordById(i);
-                            if (record != null)
-                            {
-                                addRow(dgRecordsView, activeFile.getRecordById(i));
-                            }
+                            if (record != null) addRow(dgRecordsView, activeFile.getRecordById(i));
                         }
-
                         recordCount = activeFile.Count;
                         currentFilePath = filePath;
                     }
-
                 }
             }
             catch (Exception err)
@@ -352,6 +365,63 @@ namespace Mytemize
                 string json = JsonConvert.SerializeObject(activeFile, Formatting.Indented);
                 File.WriteAllText(filePath, json);
                 currentFilePath = filePath;
+            }
+        }
+
+        // Import different file types into Lists here
+        private void importFile(string filePath, string fileType)
+        {
+            if (fileType != FILETYPE_CSV &&
+                fileType != FILETYPE_XLS) return;
+
+            if (fileType == FILETYPE_CSV) 
+            {
+                // Open a stream to the filepath
+                // To-do - check if the file is currently opened by another program
+                using (var fs = new StreamReader(filePath))
+                using (var csv = new CsvReader(fs, new CsvConfiguration(CultureInfo.InvariantCulture)))
+                {
+                    
+                    var records = new List<dynamic>();
+                    while (csv.Read())
+                    {
+                        // traverse each row and get a dictionary entry per cell
+                        var row = new Dictionary<int, string>();
+                        for (int i = 0; csv.TryGetField<string>(i, out string field); i++)
+                        {
+                            if (string.IsNullOrEmpty(field)) field = EMPTYCELL;
+                            row[i] = field;
+                        }
+                        records.Add(row);
+                    }
+
+                    // We got some records, time to build that list
+                    if (records.Count > 0)
+                    {
+                        bool fileStarted = false;
+                        int rowID = 0, colID = 0;
+                        foreach (var record in records)
+                        {
+                            foreach (var item in record)
+                            {
+                                if (!string.Equals(item.Value,EMPTYCELL))
+                                {
+                                    // A non-empty cell is found, Now restart the current file since we are now sure that we imported at least ONE data from the CSV
+                                    if (!fileStarted)
+                                    {
+                                        startNewFile();
+                                        fileStarted = true;
+                                    }
+                                    activeFile.addRecord(item.Value);
+                                    updateFileTable();
+                                }
+                                colID++;
+                            }
+                            rowID++;
+                        }
+                    }
+
+                } 
             }
         }
 
@@ -402,6 +472,18 @@ namespace Mytemize
         {
             if (dgv == null) return;
             dgv.Rows.Clear();
+        }
+
+        // method to check if file is dirty and prompt user if so
+        private void checkIfDirty(Object sender, EventArgs e)
+        {
+            if (isDirty)
+            {
+                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    menuSaveFile(sender, e);
+                }
+            }
         }
     }
 
