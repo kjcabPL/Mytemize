@@ -22,5 +22,14 @@ namespace Mytemize.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("copyrightVal")]
+        public string copyrightVal {
+            get {
+                return ((string)(this["copyrightVal"]));
+            }
+        }
     }
 }

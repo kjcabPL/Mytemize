@@ -16,7 +16,7 @@ namespace Mytemize
 {
     public partial class mzEditor : Form
     {
-        const string PLACEHOLDER_TITLE = "Mytemize Checklist Title Here";
+        const string PLACEHOLDER_TITLE = "Checklist Title";
         const string PLACEHOLDER_ITEM = "New List Item";
         const string COL_REMOVE = "colRemove", COL_OPTIONS = "colOptions", COL_DESCRIPTION = "colDescription";
 

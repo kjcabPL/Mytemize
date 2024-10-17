@@ -62,7 +62,7 @@ namespace Mytemize
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -160,7 +160,7 @@ namespace Mytemize
             // 
             // btAddItem
             // 
-            this.btAddItem.BackColor = System.Drawing.Color.PaleGreen;
+            this.btAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
             this.btAddItem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btAddItem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -186,7 +186,8 @@ namespace Mytemize
             // panel2
             // 
             this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(139)))), ((int)(((byte)(115)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
+            this.panel2.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG1;
             this.panel2.Controls.Add(this.dgRecordsView);
             this.panel2.Location = new System.Drawing.Point(12, 71);
             this.panel2.Name = "panel2";
@@ -199,6 +200,7 @@ namespace Mytemize
             this.dgRecordsView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgRecordsView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgRecordsView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dgRecordsView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgRecordsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRecordsView.ColumnHeadersVisible = false;
             this.dgRecordsView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -248,15 +250,16 @@ namespace Mytemize
             this.tbTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbTitle.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tbTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbTitle.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
+            this.tbTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
             this.tbTitle.Location = new System.Drawing.Point(0, 24);
             this.tbTitle.MaxLength = 52;
+            this.tbTitle.MinimumSize = new System.Drawing.Size(784, 33);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(784, 32);
+            this.tbTitle.Size = new System.Drawing.Size(784, 30);
             this.tbTitle.TabIndex = 4;
-            this.tbTitle.Text = "Mytemize Checklist Title";
+            this.tbTitle.Text = "Checklist Title";
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbTitle.Click += new System.EventHandler(this.tbEnable);
             this.tbTitle.Leave += new System.EventHandler(this.tbDisable);
@@ -275,8 +278,7 @@ namespace Mytemize
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
-            this.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG2;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG1;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.panel2);
@@ -289,7 +291,7 @@ namespace Mytemize
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "mzEditor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Mytemize List Editor";
+            this.Text = "Mytemize Listbuilder";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

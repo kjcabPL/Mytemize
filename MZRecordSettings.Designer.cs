@@ -45,22 +45,26 @@ namespace Mytemize
             // 
             // btOK
             // 
+            this.btOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
+            this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btOK.Location = new System.Drawing.Point(34, 309);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(75, 23);
             this.btOK.TabIndex = 0;
             this.btOK.Text = "OK";
-            this.btOK.UseVisualStyleBackColor = true;
+            this.btOK.UseVisualStyleBackColor = false;
             this.btOK.Click += new System.EventHandler(this.btOK_click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(186, 309);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.btCancel_click);
             // 
             // cbIncludePartial
@@ -87,10 +91,11 @@ namespace Mytemize
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.panel1.Controls.Add(this.dpDatePicker);
             this.panel1.Controls.Add(this.cbScheduled);
             this.panel1.Controls.Add(this.cbIncludePartial);
+            this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel1.Location = new System.Drawing.Point(12, 52);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(269, 251);
@@ -122,8 +127,9 @@ namespace Mytemize
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.panel2.Controls.Add(this.lblRecordName);
+            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel2.Location = new System.Drawing.Point(12, 13);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(269, 33);
@@ -133,7 +139,7 @@ namespace Mytemize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SeaGreen;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(294, 341);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
