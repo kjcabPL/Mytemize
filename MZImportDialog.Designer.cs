@@ -84,6 +84,7 @@ namespace Mytemize
             this.tbColumns.Name = "tbColumns";
             this.tbColumns.Size = new System.Drawing.Size(106, 20);
             this.tbColumns.TabIndex = 2;
+            this.tbColumns.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // rbImportRows
             // 
@@ -104,6 +105,7 @@ namespace Mytemize
             this.tbRows.Name = "tbRows";
             this.tbRows.Size = new System.Drawing.Size(106, 20);
             this.tbRows.TabIndex = 4;
+            this.tbRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // rbImportGrp
             // 
@@ -184,6 +186,7 @@ namespace Mytemize
             this.tbToCol.Name = "tbToCol";
             this.tbToCol.Size = new System.Drawing.Size(106, 20);
             this.tbToCol.TabIndex = 7;
+            this.tbToCol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbToRow
             // 
@@ -192,6 +195,7 @@ namespace Mytemize
             this.tbToRow.Name = "tbToRow";
             this.tbToRow.Size = new System.Drawing.Size(106, 20);
             this.tbToRow.TabIndex = 6;
+            this.tbToRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbFromCol
             // 
@@ -200,6 +204,7 @@ namespace Mytemize
             this.tbFromCol.Name = "tbFromCol";
             this.tbFromCol.Size = new System.Drawing.Size(106, 20);
             this.tbFromCol.TabIndex = 5;
+            this.tbFromCol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbFromRow
             // 
@@ -208,6 +213,7 @@ namespace Mytemize
             this.tbFromRow.Name = "tbFromRow";
             this.tbFromRow.Size = new System.Drawing.Size(106, 20);
             this.tbFromRow.TabIndex = 3;
+            this.tbFromRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // btOK
             // 

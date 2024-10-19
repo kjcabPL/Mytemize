@@ -257,7 +257,8 @@ namespace Mytemize
                 importDialog = new MZImportDialog(FILETYPE_CSV);
                 if (importDialog.ShowDialog() == DialogResult.OK)
                 {
-                    importFile(filePath, FILETYPE_CSV);
+                    ImportSettings settings = importDialog.settings;
+                    importFile(filePath, settings);
                 }
             }
 
@@ -376,13 +377,17 @@ namespace Mytemize
         }
 
         // Import different file types into Lists here
-        private void importFile(string filePath, string fileType)
+        private void importFile(string filePath, ImportSettings settings)
         {
+            string fileType = settings.fileType;
+            string action = "";
+            bool recordItem = false;
             if (fileType != FILETYPE_CSV &&
                 fileType != FILETYPE_XLS) return;
 
             if (fileType == FILETYPE_CSV) 
             {
+                action = settings.importType;
                 // Open a stream to the filepath
                 // To-do - check if the file is currently opened by another program
                 using (var fs = new StreamReader(filePath))
@@ -409,8 +414,19 @@ namespace Mytemize
                         int rowID = 0, colID = 0;
                         foreach (var record in records)
                         {
+                            // only set recordItem to true if action type is ALL
+                            recordItem = (action == "ALL") ? true : false;
+                            if (action == "ROW") recordItem = (rowID == (settings.targetRow - 1)) ? true : false;
+
                             foreach (var item in record)
                             {
+                                // check if target column matches the current column ID
+                                if (action == "COLUMN") recordItem = (colID == (settings.targetColumn - 1)) ? true : false;
+                                if (action == "GROUP")
+                                {
+                                    recordItem = (rowID >= (settings.grpStartCell.Item1 - 1) && rowID < settings.grpEndCell.Item1) ? true : false;
+                                    if (recordItem) recordItem = (colID >= (settings.grpStartCell.Item2 - 1) && colID < settings.grpEndCell.Item2) ? true : false;
+                                }
                                 if (!string.Equals(item.Value,EMPTYCELL))
                                 {
                                     // A non-empty cell is found, Now restart the current file since we are now sure that we imported at least ONE data from the CSV
@@ -419,11 +435,16 @@ namespace Mytemize
                                         startNewFile();
                                         fileStarted = true;
                                     }
-                                    activeFile.addRecord(item.Value);
-                                    updateFileTable();
+                                    if (recordItem)
+                                    {
+                                        activeFile.addRecord(item.Value);
+                                        updateFileTable();
+                                    }
+                                    
                                 }
                                 colID++;
                             }
+                            colID = 0;
                             rowID++;
                         }
                     }

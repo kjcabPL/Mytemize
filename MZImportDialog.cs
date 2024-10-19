@@ -13,7 +13,9 @@ namespace Mytemize
     public partial class MZImportDialog : Form
     {
         const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$";
-        string fileType;
+
+        internal ImportSettings settings;
+        public string fileType;
 
         public MZImportDialog(string mode)
         {
@@ -25,7 +27,7 @@ namespace Mytemize
         // Setup the controls in the form depending on the value of mode
         private void setupControls()
         {
-
+            settings = new ImportSettings(fileType);
         }
 
         // control behavior here
@@ -34,8 +36,30 @@ namespace Mytemize
             Button bt = sender as Button;
             if (bt == btOK)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                int item1, item2;
+                settings.targetColumn = int.TryParse(tbColumns.Text, out int val) ? val : 0;
+                settings.targetRow = int.TryParse(tbRows.Text, out val) ? val : 0;
+                
+                item1 = int.TryParse(tbFromRow.Text, out val) ? val : 0;
+                item2 = int.TryParse(tbFromCol.Text, out val) ? val : 0;
+                settings.grpStartCell = new Tuple<int, int>(item1, item2);
+
+                item1 = int.TryParse(tbToRow.Text, out val) ? val : 0;
+                item2 = int.TryParse(tbToCol.Text, out val) ? val : 0;
+                settings.grpEndCell = new Tuple<int, int>(item1, item2);
+
+                // check if the end cells are not less than the start cells to prevent confusion
+                // Technically, nothing happens with the import, but best to inform the user anyway
+                if (settings.grpEndCell.Item1 < settings.grpStartCell.Item1 || settings.grpEndCell.Item2 < settings.grpStartCell.Item2)
+                {
+                    MessageBox.Show("Target Cell values cannot be less than Starting Cell values", "Error");
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+
             }
             if (bt == btCancel)
             {
@@ -52,24 +76,28 @@ namespace Mytemize
             {
                 // disable other textboxes
                 enableTbGroups(false, 0b0001);
+                settings.importType = "ALL";
             }
             else if (rb == rbImportCols && rb.Checked)
             {
                 // disable other textboxes
                 enableTbGroups(true, 0b0010);
                 enableTbGroups(false, 0b1100);
+                settings.importType = "COLUMN";
             }
             else if (rb == rbImportRows && rb.Checked)
             {
                 // disable other textboxes
                 enableTbGroups(true, 0b0100);
                 enableTbGroups(false, 0b1010);
+                settings.importType = "ROW";
             }
             else if (rb == rbImportGrp && rb.Checked)
             {
                 // disable other textboxes
                 enableTbGroups(true, 0b1000);
                 enableTbGroups(false, 0b0110);
+                settings.importType = "GROUP";
             }
         }
 
@@ -119,6 +147,17 @@ namespace Mytemize
                 else tbFromRow.Focus();
             }
 
+        }
+
+        // misc functions
+
+        // Detect if the key entered in the textbox is a number. Reject if not
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys such as backpress
+            if (char.IsControl(e.KeyChar)) return;
+            if (char.IsDigit(e.KeyChar)) return;
+            e.Handled = true; // bypass the event
         }
     }
 }

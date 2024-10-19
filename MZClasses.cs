@@ -237,4 +237,29 @@ namespace Mytemize
         }
 
     }
+
+    /**
+     * Import Settings - A settings class used to refer to how an Import File should parse the data within the file like CSV or XLS
+     * 
+     */
+    internal class ImportSettings
+    {
+        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$";
+
+        public string fileType, importType;
+
+        public int targetColumn, targetRow;
+        public Tuple<int, int> grpStartCell, grpEndCell;
+
+        public ImportSettings(string filetype, string importtype = "ALL", int row = 0, int col = 0, int fromCellRow = 0, int fromCellCol = 0, int toCellRow = 0, int toCellCol = 0)
+        {
+            fileType = filetype.ToUpper();
+            importType = importtype.ToUpper();
+
+            targetRow = row;
+            targetColumn = col;
+            grpStartCell = new Tuple<int, int>(fromCellRow, fromCellCol);
+            grpEndCell = new Tuple<int, int>(toCellRow, toCellCol);
+        }
+    }
 }
