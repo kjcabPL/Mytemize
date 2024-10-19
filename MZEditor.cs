@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using CsvHelper;
 using CsvHelper.Configuration;
+using ExcelDataReader;
 
 
 namespace Mytemize
@@ -238,30 +239,41 @@ namespace Mytemize
             }
         }
 
-        // Import menus
-        private void menuImportCSV(object sender, EventArgs e)
+        // Import menu
+        private void menuImportFile(object sender, EventArgs e)
         {
             checkIfDirty(sender, e);
-
             MZImportDialog importDialog;
-
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            string file = "";
+            
             // first, open a dialog to the CSV to import
             OpenFileDialog openFileDG = new OpenFileDialog();
-            openFileDG.Filter = "Comma-separated value files (*.csv) | *.csv";
-            openFileDG.Title = "Import CSV as list";
+
+            if (menuItem == CSVToolStripMenuItem)
+            {
+                file = FILETYPE_CSV;
+                openFileDG.Filter = "Comma-separated Value Files (*.csv) | *.csv";
+                openFileDG.Title = "Import CSV as List";
+            }
+            else if (menuItem == XLSToolStripMenuItem)
+            {
+                file = FILETYPE_XLS;
+                openFileDG.Filter = "Excel files (*.xlsx) | *.xlsx* | All files (*.*) | *.*";
+                openFileDG.Title = "Import an Excel Sheet as List";
+            }
 
             if (openFileDG.ShowDialog() == DialogResult.OK)
             {
                 // then open a stream to the file
                 string filePath = openFileDG.FileName;
-                importDialog = new MZImportDialog(FILETYPE_CSV);
+                importDialog = new MZImportDialog(file);
                 if (importDialog.ShowDialog() == DialogResult.OK)
                 {
                     ImportSettings settings = importDialog.settings;
                     importFile(filePath, settings);
                 }
             }
-
         }
 
         private void menuSaveAsFile(object sender, EventArgs e)
@@ -380,14 +392,15 @@ namespace Mytemize
         private void importFile(string filePath, ImportSettings settings)
         {
             string fileType = settings.fileType;
-            string action = "";
-            bool recordItem = false;
             if (fileType != FILETYPE_CSV &&
                 fileType != FILETYPE_XLS) return;
 
+            string action = settings.importType;
+            int rowID = 0, colID = 0;
+            bool fileStarted = false, recordItem = false;
+
             if (fileType == FILETYPE_CSV) 
             {
-                action = settings.importType;
                 // Open a stream to the filepath
                 // To-do - check if the file is currently opened by another program
                 using (var fs = new StreamReader(filePath))
@@ -410,8 +423,6 @@ namespace Mytemize
                     // We got some records, time to build that list
                     if (records.Count > 0)
                     {
-                        bool fileStarted = false;
-                        int rowID = 0, colID = 0;
                         foreach (var record in records)
                         {
                             // only set recordItem to true if action type is ALL
@@ -450,6 +461,51 @@ namespace Mytemize
                     }
 
                 } 
+            }
+            else if (fileType == FILETYPE_XLS)
+            {
+                using (var fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    // read the opened filestream as an excelReaderFactory
+                    using (var xls = ExcelReaderFactory.CreateReader(fs))
+                    {
+                        // get the data set from the excel file. Each sheet corresponds to a table in the Tables array
+                        var result = xls.AsDataSet();
+                        var table = result.Tables[0];
+                        foreach (DataRow row in table.Rows)
+                        {
+                            // only set recordItem to true if action type is ALL
+                            recordItem = (action == "ALL") ? true : false;
+                            if (action == "ROW") recordItem = (rowID == (settings.targetRow)) ? true : false;
+                            foreach (var item in row.ItemArray)
+                            {
+                                // check if target column matches the current column ID
+                                if (action == "COLUMN") recordItem = (colID == (settings.targetColumn)) ? true : false;
+                                if (action == "GROUP")
+                                {
+                                    recordItem = (rowID >= (settings.grpStartCell.Item1) && rowID <= settings.grpEndCell.Item1) ? true : false;
+                                    if (recordItem) recordItem = (colID >= (settings.grpStartCell.Item2) && colID <= settings.grpEndCell.Item2) ? true : false;
+                                }
+                                if (!string.IsNullOrEmpty(item.ToString()))
+                                {
+                                    if (!fileStarted)
+                                    {
+                                        startNewFile();
+                                        fileStarted = true;
+                                    }
+                                    if (recordItem)
+                                    {
+                                        activeFile.addRecord(item.ToString());
+                                        updateFileTable();
+                                    }
+                                }
+                                colID++;
+                            }
+                            colID = 0;
+                            rowID++;
+                        }
+                    }
+                }
             }
         }
 
