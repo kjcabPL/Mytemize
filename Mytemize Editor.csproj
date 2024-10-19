@@ -92,6 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MZImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZImportDialog.Designer.cs">
+      <DependentUpon>MZImportDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="MZViewerSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MZImportDialog.resx">
+      <DependentUpon>MZImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MZViewerSettings.resx">
       <DependentUpon>MZViewerSettings.cs</DependentUpon>
     </EmbeddedResource>

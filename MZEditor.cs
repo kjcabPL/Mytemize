@@ -17,6 +17,7 @@ using CsvHelper.Configuration;
 
 namespace Mytemize
 {
+
     public partial class mzEditor : Form
     {
         const string PLACEHOLDER_TITLE = "Checklist Title";
@@ -241,7 +242,9 @@ namespace Mytemize
         private void menuImportCSV(object sender, EventArgs e)
         {
             checkIfDirty(sender, e);
-            
+
+            MZImportDialog importDialog;
+
             // first, open a dialog to the CSV to import
             OpenFileDialog openFileDG = new OpenFileDialog();
             openFileDG.Filter = "Comma-separated value files (*.csv) | *.csv";
@@ -251,7 +254,11 @@ namespace Mytemize
             {
                 // then open a stream to the file
                 string filePath = openFileDG.FileName;
-                importFile(filePath, FILETYPE_CSV);
+                importDialog = new MZImportDialog(FILETYPE_CSV);
+                if (importDialog.ShowDialog() == DialogResult.OK)
+                {
+                    importFile(filePath, FILETYPE_CSV);
+                }
             }
 
         }
