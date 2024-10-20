@@ -33,10 +33,20 @@ namespace Mytemize
         public int recordCount;
         public bool isDirty = false;
 
-        public mzEditor()
+        public mzEditor(string action = null, string filePath = "", string type = "")
         {
             InitializeComponent();
-            startNewFile();
+
+            // check if any arguments were passed into the program
+            if (!string.IsNullOrEmpty(action))
+            {
+                if (action == "import")
+                {
+                    ImportSettings setting = new ImportSettings(type, "ALL");
+                    importFile(filePath, setting);
+                }
+            }
+            else startNewFile();
         }
 
         private void tbEnable(object sender, EventArgs e)

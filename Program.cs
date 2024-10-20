@@ -20,7 +20,7 @@ namespace Mytemize
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // check for the -v parameter
+            // check for the -v parameter to open in viewer
             if (args.Length > 0 && (args[0] == "-v" || args[0] == "-V"))
             {
                 // take the string path from the next parameter
@@ -32,6 +32,27 @@ namespace Mytemize
 
                 // pass the parameters into the viewer
                 Application.Run(new MZViewer(fullPath, isDemo));
+            }
+            // check for the -i parameter to import specific files into viewer
+            else if (args.Length > 0 && (args[0] == "-i" || args[0] == "-I"))
+            {
+                if (args.Length > 1 &&
+                    (args[1] == "-csv" || args[1] == "-CSV") ||
+                    (args[1] == "-xls" || args[1] == "-XLS") ||
+                    (args[1] == "-txt" || args[1] == "-TXT")
+                    )
+                {
+                    string fileType = args[1].ToUpper();
+                    fileType = fileType.Substring(1); // trim the dash from the parameter passed
+                    
+                    if (args.Length > 2 && !string.IsNullOrEmpty(args[2]))
+                    {
+                        string filePath = args[2];
+                        Application.Run(new mzEditor("import", filePath, fileType));
+                    }
+                    else MessageBox.Show("Application Error: No file specified for import action", "ERROR");
+                }
+                else MessageBox.Show("Application Error: Invalid parameters for import action", "ERROR");
             }
             else
             {
