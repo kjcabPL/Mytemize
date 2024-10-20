@@ -87,15 +87,10 @@ namespace Mytemize
             string desc = tbNewItem.Text;
             if (activeFile.addRecord(desc))
             {
-                recordCount = activeFile.Count;
                 updateFileTable();
                 tbNewItem.Text = PLACEHOLDER_ITEM;
-                if (!isDirty) isDirty = true;
             }
-            else
-            {
-                MessageBox.Show("Error adding new record.", "ERROR");
-            }
+            else MessageBox.Show("Error adding new record.", "ERROR");
         }
 
         private void btRecordSetup(object sender, EventArgs e)
@@ -106,11 +101,7 @@ namespace Mytemize
             if (btSetting == null) return;
 
             ButtonTagData tagData = btSetting.Tag as ButtonTagData;
-            if (tagData != null)
-            {
-                MessageBox.Show("Opening item setup for " + tagData.entryID);
-            }
-            
+            if (tagData != null) MessageBox.Show("Opening item setup for " + tagData.entryID);            
         }
 
         // DataGridView cell content events here
@@ -165,7 +156,6 @@ namespace Mytemize
             DataGridView dgv = sender as DataGridView;
             if (dgv == null) return;
             if (e.RowIndex < 0) return;
-
             // a description cell was updated
             if (e.ColumnIndex == 2)
             {
@@ -173,10 +163,7 @@ namespace Mytemize
                 if (tagData != null)
                 {
                     // MessageBox.Show("Updating Entry At: " + tagData.rowID);
-                    if (activeFile != null)
-                    {
-                        activeFile.getRecordById(tagData.entryID).description = dgv.Rows[e.RowIndex].Cells[COL_DESCRIPTION].Value.ToString();
-                    }
+                    if (activeFile != null) activeFile.getRecordById(tagData.entryID).description = dgv.Rows[e.RowIndex].Cells[COL_DESCRIPTION].Value.ToString();
                 }
             }
         }
@@ -191,10 +178,7 @@ namespace Mytemize
             // Ask the user if they want to save changes first
             if (isDirty)
             {
-                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    menuSaveFile(sender, e);
-                }
+                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes) menuSaveFile(sender, e);
                 else startNewFile();
             }
             else startNewFile();
@@ -259,8 +243,8 @@ namespace Mytemize
             else if (menuItem == XLSToolStripMenuItem)
             {
                 file = FILETYPE_XLS;
-                openFileDG.Filter = "Excel files (*.xlsx) | *.xlsx* | All files (*.*) | *.*";
-                openFileDG.Title = "Import an Excel Sheet as List";
+                openFileDG.Filter = "Excel files (*.xlsx;*.xls) | *.xlsx;*.xls | All files (*.*) | *.*";
+                openFileDG.Title = "Import Excel Sheet as List";
             }
 
             if (openFileDG.ShowDialog() == DialogResult.OK)
@@ -428,7 +412,6 @@ namespace Mytemize
                             // only set recordItem to true if action type is ALL
                             recordItem = (action == "ALL") ? true : false;
                             if (action == "ROW") recordItem = (rowID == (settings.targetRow - 1)) ? true : false;
-
                             foreach (var item in record)
                             {
                                 // check if target column matches the current column ID
@@ -451,7 +434,6 @@ namespace Mytemize
                                         activeFile.addRecord(item.Value);
                                         updateFileTable();
                                     }
-                                    
                                 }
                                 colID++;
                             }
@@ -459,7 +441,6 @@ namespace Mytemize
                             rowID++;
                         }
                     }
-
                 } 
             }
             else if (fileType == FILETYPE_XLS)
@@ -514,10 +495,9 @@ namespace Mytemize
         {
             // Update table with the new row
             MZRecord temp = activeFile.getRecordLatest();
-            if (temp != null)
-            {
-                addRow(dgRecordsView, temp);
-            }
+            if (temp != null) addRow(dgRecordsView, temp);
+            recordCount = activeFile.Count;
+            if (!isDirty) isDirty = true;
         }
 
         private void addRow(DataGridView dgv, MZRecord entry = null)
@@ -563,10 +543,7 @@ namespace Mytemize
         {
             if (isDirty)
             {
-                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    menuSaveFile(sender, e);
-                }
+                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes) menuSaveFile(sender, e);
             }
         }
     }
@@ -577,7 +554,6 @@ namespace Mytemize
     {
         public int entryID, rowID;
         public RecordState recordState;
-
 
         //constructor
         public ButtonTagData (int entry = 0, int row = 0, RecordState state = RecordState.INCOMPLETE)
