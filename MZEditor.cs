@@ -24,7 +24,7 @@ namespace Mytemize
         const string PLACEHOLDER_TITLE = "Checklist Title";
         const string PLACEHOLDER_ITEM = "New List Item";
         const string COL_REMOVE = "colRemove", COL_OPTIONS = "colOptions", COL_DESCRIPTION = "colDescription";
-        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$";
+        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", FILETYPE_TXT = "TXT", EMPTYCELL = "$$_EMPTY_$$";
 
         // only have one file opened at a time to prevent complications
         internal MZList activeFile;
@@ -112,18 +112,13 @@ namespace Mytemize
             if (dgv == null) return;
             if (e.RowIndex < 0) return;
 
-            // MessageBox.Show("Cell Clicked: " + e.RowIndex + " - " + e.ColumnIndex + " - " + e.GetType());
             ButtonTagData tagData;
 
             // a button in the remove column was clicked
             if (e.ColumnIndex == 0)
             {
                 tagData = dgv.Rows[e.RowIndex].Cells[COL_REMOVE].Tag as ButtonTagData;
-                if (tagData != null)
-                {
-                    // MessageBox.Show("Removing Entry At: " + tagData.rowID);
-                    removeRow(dgRecordsView, e.RowIndex, tagData.entryID);
-                }
+                if (tagData != null) removeRow(dgRecordsView, e.RowIndex, tagData.entryID);
                 if (!isDirty) isDirty = true;
             }
             // a button in the options column was clicked
@@ -234,7 +229,13 @@ namespace Mytemize
             // first, open a dialog to the CSV to import
             OpenFileDialog openFileDG = new OpenFileDialog();
 
-            if (menuItem == CSVToolStripMenuItem)
+            if (menuItem == TXTToolStripMenuItem)
+            {
+                file = FILETYPE_TXT;
+                openFileDG.Filter = "Text files (*.txt) | *.txt";
+                openFileDG.Title = "Import Text File as List";
+            }
+            else if (menuItem == CSVToolStripMenuItem)
             {
                 file = FILETYPE_CSV;
                 openFileDG.Filter = "Comma-separated Value Files (*.csv) | *.csv";
@@ -243,7 +244,7 @@ namespace Mytemize
             else if (menuItem == XLSToolStripMenuItem)
             {
                 file = FILETYPE_XLS;
-                openFileDG.Filter = "Excel files (*.xlsx;*.xls) | *.xlsx;*.xls | All files (*.*) | *.*";
+                openFileDG.Filter = "Excel files (*.xlsx;*.xls) | *.xlsx;*.xls";
                 openFileDG.Title = "Import Excel Sheet as List";
             }
 
@@ -273,7 +274,6 @@ namespace Mytemize
                 string filePath = saveFileDialog.FileName;
                 saveFile(filePath);
             }
-            
         }
 
         // Opens the edited file in the viewer. Does not open if changes weren't made 
@@ -377,7 +377,8 @@ namespace Mytemize
         {
             string fileType = settings.fileType;
             if (fileType != FILETYPE_CSV &&
-                fileType != FILETYPE_XLS) return;
+                fileType != FILETYPE_XLS &&
+                fileType != FILETYPE_TXT) return;
 
             string action = settings.importType;
             int rowID = 0, colID = 0;
@@ -424,13 +425,13 @@ namespace Mytemize
                                 if (!string.Equals(item.Value,EMPTYCELL))
                                 {
                                     // A non-empty cell is found, Now restart the current file since we are now sure that we imported at least ONE data from the CSV
-                                    if (!fileStarted)
-                                    {
-                                        startNewFile();
-                                        fileStarted = true;
-                                    }
                                     if (recordItem)
                                     {
+                                        if (!fileStarted)
+                                        {
+                                            startNewFile();
+                                            fileStarted = true;
+                                        }
                                         activeFile.addRecord(item.Value);
                                         updateFileTable();
                                     }
@@ -469,13 +470,13 @@ namespace Mytemize
                                 }
                                 if (!string.IsNullOrEmpty(item.ToString()))
                                 {
-                                    if (!fileStarted)
-                                    {
-                                        startNewFile();
-                                        fileStarted = true;
-                                    }
                                     if (recordItem)
                                     {
+                                        if (!fileStarted)
+                                        {
+                                            startNewFile();
+                                            fileStarted = true;
+                                        }
                                         activeFile.addRecord(item.ToString());
                                         updateFileTable();
                                     }
@@ -485,6 +486,34 @@ namespace Mytemize
                             colID = 0;
                             rowID++;
                         }
+                    }
+                }
+            }
+            else if (fileType == FILETYPE_TXT)
+            {
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                using (var contents = new StreamReader(fs))
+                {
+                    string line;
+                    rowID = 1;
+                    while ((line = contents.ReadLine()) != null)
+                    {
+                        recordItem = (action == "ALL") ? true : false;
+                        if (action == "GROUP") recordItem = (rowID >= (settings.grpStartCell.Item1) && rowID <= settings.grpEndCell.Item1) ? true : false;
+                        if (!string.IsNullOrEmpty(line))
+                        {
+                            if (recordItem)
+                            {
+                                if (!fileStarted)
+                                {
+                                    startNewFile();
+                                    fileStarted = true;
+                                }
+                                activeFile.addRecord(line);
+                                updateFileTable();
+                            }
+                        }
+                        rowID++;
                     }
                 }
             }

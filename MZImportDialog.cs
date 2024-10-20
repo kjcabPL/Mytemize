@@ -12,7 +12,7 @@ namespace Mytemize
 {
     public partial class MZImportDialog : Form
     {
-        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$";
+        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", EMPTYCELL = "$$_EMPTY_$$", FILETYPE_TXT = "TXT";
 
         internal ImportSettings settings;
         public string fileType;
@@ -28,6 +28,14 @@ namespace Mytemize
         private void setupControls()
         {
             settings = new ImportSettings(fileType);
+            if (fileType == FILETYPE_TXT)
+            {
+                rbImportCols.Enabled = false;
+                rbImportRows.Enabled = false;
+                tbFromCol.Enabled = false;
+                tbToCol.Enabled = false;
+                rbImportGrp.Text = "Import Selected Lines";
+            }
         }
 
         // control behavior here
@@ -133,10 +141,14 @@ namespace Mytemize
             // enables/disables the tbFroms and tbTos
             if ((bFlag & 0b1000) == 0b1000)
             {
-                tbFromCol.Enabled = enable;
                 tbFromRow.Enabled = enable;
-                tbToCol.Enabled = enable;
                 tbToRow.Enabled = enable;
+                
+                if (fileType != FILETYPE_TXT)
+                {
+                    tbFromCol.Enabled = enable;
+                    tbToCol.Enabled = enable;
+                }
                 if (!enable)
                 {
                     tbFromCol.Clear();
