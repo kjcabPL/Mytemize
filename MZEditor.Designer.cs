@@ -50,6 +50,8 @@ namespace Mytemize
             this.btAddItem = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panelDragDropLabel = new System.Windows.Forms.Panel();
+            this.lblDragDrop = new System.Windows.Forms.Label();
             this.dgRecordsView = new System.Windows.Forms.DataGridView();
             this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colOptions = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -60,6 +62,7 @@ namespace Mytemize
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panelDragDropLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRecordsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mZListBindingSource)).BeginInit();
@@ -74,8 +77,7 @@ namespace Mytemize
             this.HelpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1045, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,35 +97,35 @@ namespace Mytemize
             // menuStrip_FileNew
             // 
             this.menuStrip_FileNew.Name = "menuStrip_FileNew";
-            this.menuStrip_FileNew.Size = new System.Drawing.Size(180, 22);
+            this.menuStrip_FileNew.Size = new System.Drawing.Size(124, 22);
             this.menuStrip_FileNew.Text = "New List";
             this.menuStrip_FileNew.Click += new System.EventHandler(this.menuNewFile);
             // 
             // menuStrip_FileOpen
             // 
             this.menuStrip_FileOpen.Name = "menuStrip_FileOpen";
-            this.menuStrip_FileOpen.Size = new System.Drawing.Size(180, 22);
+            this.menuStrip_FileOpen.Size = new System.Drawing.Size(124, 22);
             this.menuStrip_FileOpen.Text = "Open List";
             this.menuStrip_FileOpen.Click += new System.EventHandler(this.menuOpenFile);
             // 
             // menuStrip_FileSave
             // 
             this.menuStrip_FileSave.Name = "menuStrip_FileSave";
-            this.menuStrip_FileSave.Size = new System.Drawing.Size(180, 22);
+            this.menuStrip_FileSave.Size = new System.Drawing.Size(124, 22);
             this.menuStrip_FileSave.Text = "Save List";
             this.menuStrip_FileSave.Click += new System.EventHandler(this.menuSaveFile);
             // 
             // menuStrip_FileSaveAs
             // 
             this.menuStrip_FileSaveAs.Name = "menuStrip_FileSaveAs";
-            this.menuStrip_FileSaveAs.Size = new System.Drawing.Size(180, 22);
+            this.menuStrip_FileSaveAs.Size = new System.Drawing.Size(124, 22);
             this.menuStrip_FileSaveAs.Text = "Save As...";
             this.menuStrip_FileSaveAs.Click += new System.EventHandler(this.menuSaveAsFile);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // importToolStripMenuItem
             // 
@@ -132,27 +134,27 @@ namespace Mytemize
             this.CSVToolStripMenuItem,
             this.XLSToolStripMenuItem});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.importToolStripMenuItem.Text = "Import";
             // 
             // TXTToolStripMenuItem
             // 
             this.TXTToolStripMenuItem.Name = "TXTToolStripMenuItem";
-            this.TXTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.TXTToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.TXTToolStripMenuItem.Text = ".TXT";
             this.TXTToolStripMenuItem.Click += new System.EventHandler(this.menuImportFile);
             // 
             // CSVToolStripMenuItem
             // 
             this.CSVToolStripMenuItem.Name = "CSVToolStripMenuItem";
-            this.CSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CSVToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.CSVToolStripMenuItem.Text = ".CSV";
             this.CSVToolStripMenuItem.Click += new System.EventHandler(this.menuImportFile);
             // 
             // XLSToolStripMenuItem
             // 
             this.XLSToolStripMenuItem.Name = "XLSToolStripMenuItem";
-            this.XLSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.XLSToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.XLSToolStripMenuItem.Text = ".XLS";
             this.XLSToolStripMenuItem.Click += new System.EventHandler(this.menuImportFile);
             // 
@@ -190,12 +192,11 @@ namespace Mytemize
             // 
             this.tbNewItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNewItem.Location = new System.Drawing.Point(71, 4);
-            this.tbNewItem.Margin = new System.Windows.Forms.Padding(4);
+            this.tbNewItem.Location = new System.Drawing.Point(53, 3);
             this.tbNewItem.Multiline = true;
             this.tbNewItem.Name = "tbNewItem";
             this.tbNewItem.ReadOnly = true;
-            this.tbNewItem.Size = new System.Drawing.Size(947, 55);
+            this.tbNewItem.Size = new System.Drawing.Size(711, 45);
             this.tbNewItem.TabIndex = 1;
             this.tbNewItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbNewItem.Click += new System.EventHandler(this.tbEnable);
@@ -211,10 +212,9 @@ namespace Mytemize
             this.btAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAddItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAddItem.Image = global::Mytemize.Properties.Resources.add_button;
-            this.btAddItem.Location = new System.Drawing.Point(3, 4);
-            this.btAddItem.Margin = new System.Windows.Forms.Padding(4);
+            this.btAddItem.Location = new System.Drawing.Point(2, 3);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(60, 55);
+            this.btAddItem.Size = new System.Drawing.Size(45, 45);
             this.btAddItem.TabIndex = 0;
             this.btAddItem.UseVisualStyleBackColor = false;
             this.btAddItem.Click += new System.EventHandler(this.btAddRecord);
@@ -224,10 +224,9 @@ namespace Mytemize
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.btAddItem);
             this.panel1.Controls.Add(this.tbNewItem);
-            this.panel1.Location = new System.Drawing.Point(16, 622);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(12, 505);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1019, 63);
+            this.panel1.Size = new System.Drawing.Size(764, 51);
             this.panel1.TabIndex = 2;
             // 
             // panel2
@@ -235,15 +234,43 @@ namespace Mytemize
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
             this.panel2.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG1;
+            this.panel2.Controls.Add(this.panelDragDropLabel);
             this.panel2.Controls.Add(this.dgRecordsView);
-            this.panel2.Location = new System.Drawing.Point(16, 87);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(12, 71);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1019, 527);
+            this.panel2.Size = new System.Drawing.Size(764, 428);
             this.panel2.TabIndex = 3;
+            // 
+            // panelDragDropLabel
+            // 
+            this.panelDragDropLabel.AllowDrop = true;
+            this.panelDragDropLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(64)))), ((int)(((byte)(128)))));
+            this.panelDragDropLabel.Controls.Add(this.lblDragDrop);
+            this.panelDragDropLabel.Enabled = false;
+            this.panelDragDropLabel.Location = new System.Drawing.Point(3, 3);
+            this.panelDragDropLabel.Name = "panelDragDropLabel";
+            this.panelDragDropLabel.Size = new System.Drawing.Size(757, 422);
+            this.panelDragDropLabel.TabIndex = 2;
+            this.panelDragDropLabel.Visible = false;
+            this.panelDragDropLabel.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragDrop);
+            this.panelDragDropLabel.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragEnter);
+            this.panelDragDropLabel.DragLeave += new System.EventHandler(this.dgvArea_DragLeave);
+            // 
+            // lblDragDrop
+            // 
+            this.lblDragDrop.AutoSize = true;
+            this.lblDragDrop.BackColor = System.Drawing.Color.Transparent;
+            this.lblDragDrop.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDragDrop.Location = new System.Drawing.Point(196, 194);
+            this.lblDragDrop.Name = "lblDragDrop";
+            this.lblDragDrop.Size = new System.Drawing.Size(373, 40);
+            this.lblDragDrop.TabIndex = 0;
+            this.lblDragDrop.Text = "Drag and Drop Files Here";
+            this.lblDragDrop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgRecordsView
             // 
+            this.dgRecordsView.AllowDrop = true;
             this.dgRecordsView.AllowUserToAddRows = false;
             this.dgRecordsView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgRecordsView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
@@ -256,16 +283,17 @@ namespace Mytemize
             this.colOptions,
             this.colDescription});
             this.dgRecordsView.GridColor = System.Drawing.Color.DarkGreen;
-            this.dgRecordsView.Location = new System.Drawing.Point(4, 4);
-            this.dgRecordsView.Margin = new System.Windows.Forms.Padding(4);
+            this.dgRecordsView.Location = new System.Drawing.Point(3, 3);
             this.dgRecordsView.MultiSelect = false;
             this.dgRecordsView.Name = "dgRecordsView";
             this.dgRecordsView.RowHeadersVisible = false;
             this.dgRecordsView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgRecordsView.Size = new System.Drawing.Size(1009, 519);
+            this.dgRecordsView.Size = new System.Drawing.Size(757, 422);
             this.dgRecordsView.TabIndex = 1;
             this.dgRecordsView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCellContentClick);
             this.dgRecordsView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCellContentUpdate);
+            this.dgRecordsView.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragDrop);
+            this.dgRecordsView.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragEnter);
             // 
             // colRemove
             // 
@@ -302,12 +330,11 @@ namespace Mytemize
             this.tbTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
             this.tbTitle.Location = new System.Drawing.Point(0, 24);
-            this.tbTitle.Margin = new System.Windows.Forms.Padding(4);
             this.tbTitle.MaxLength = 52;
-            this.tbTitle.MinimumSize = new System.Drawing.Size(1045, 33);
+            this.tbTitle.MinimumSize = new System.Drawing.Size(784, 33);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(1045, 30);
+            this.tbTitle.Size = new System.Drawing.Size(784, 30);
             this.tbTitle.TabIndex = 4;
             this.tbTitle.Text = "Checklist Title";
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -325,11 +352,11 @@ namespace Mytemize
             // 
             // mzEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(44)))), ((int)(((byte)(54)))));
             this.BackgroundImage = global::Mytemize.Properties.Resources.myzEditorBG1;
-            this.ClientSize = new System.Drawing.Size(1045, 690);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -338,16 +365,18 @@ namespace Mytemize
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1061, 729);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "mzEditor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Mytemize Listbuilder";
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragEnter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panelDragDropLabel.ResumeLayout(false);
+            this.panelDragDropLabel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRecordsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mZListBindingSource)).EndInit();
@@ -384,6 +413,8 @@ namespace Mytemize
         private System.Windows.Forms.ToolStripMenuItem CSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem XLSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TXTToolStripMenuItem;
+        private System.Windows.Forms.Panel panelDragDropLabel;
+        private System.Windows.Forms.Label lblDragDrop;
     }
 }
 

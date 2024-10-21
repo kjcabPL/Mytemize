@@ -114,7 +114,9 @@ namespace Mytemize
             if (tagData != null) MessageBox.Show("Opening item setup for " + tagData.entryID);            
         }
 
-        // DataGridView cell content events here
+        /*
+         *  DataGridView and DGV cell content events here
+         */
         private void dgvCellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -157,7 +159,6 @@ namespace Mytemize
         // if a description cell is updated, update its specific entry's description as well
         private void dgvCellContentUpdate(object sender, DataGridViewCellEventArgs e)
         {
-
             DataGridView dgv = sender as DataGridView;
             if (dgv == null) return;
             if (e.RowIndex < 0) return;
@@ -171,6 +172,44 @@ namespace Mytemize
                     if (activeFile != null) activeFile.getRecordById(tagData.entryID).description = dgv.Rows[e.RowIndex].Cells[COL_DESCRIPTION].Value.ToString();
                 }
             }
+        }
+
+        // If a file is dragged over the datagridview
+        private void dgvArea_DragEnter(object sender, DragEventArgs e)
+        {
+            panelDragDropLabel.Visible = true;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else e.Effect = DragDropEffects.None;
+            
+        }
+
+        // Once a file is dropped the datagridview 
+        private void dgvArea_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Dropped file data will ALWAYS be in an array, even if it's just one file. We only take the first one here.
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length > 0)
+                {
+                    checkIfDirty(sender); // check first if document is dirty and prompt user to save changes if so
+                    string file = files[0];
+                    if (Path.GetExtension(file).Equals(".csv", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_CSV, file);
+                    else if (Path.GetExtension(file).Equals(".txt", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_TXT, file);
+                    else if (Path.GetExtension(file).Equals(".xls", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".xlsx", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_XLS, file);
+                    else MessageBox.Show("Unable to import file as list: File type not supported.", "Import Error");
+                }
+            }
+            panelDragDropLabel.Visible = false;
+        }
+
+        // Once a the dragdrop event leaves
+        private void dgvArea_DragLeave(object sender, EventArgs e)
+        {
+            panelDragDropLabel.Visible = false;
         }
 
         /*
@@ -192,7 +231,7 @@ namespace Mytemize
         // Do on menu "open list" is clicked
         private void menuOpenFile(object sender, EventArgs e)
         {
-            checkIfDirty(sender, e);
+            checkIfDirty(sender);
 
             OpenFileDialog openFileDG = new OpenFileDialog();
             openFileDG.Filter = "Mytemize Files (*.myz)|*.myz|All files (*.*)|*.*";
@@ -208,67 +247,24 @@ namespace Mytemize
         // Do when save file is clicked
         private void menuSaveFile(object sender, EventArgs e)
         {
-            // Open up a save file dialog to collect the path;
-            if (currentFilePath == null)
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Mytemize files (*.myz)|*.myz|All files (*.*)|*.*";
-                saveFileDialog.Title = "Save Mytemize List";
-
-                // Proceed to save file
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string filePath = saveFileDialog.FileName;
-                    saveFile(filePath);
-                }
-            }
-            else
-            {
-                saveFile(currentFilePath);
-            }
+            saveFileDialog();
         }
 
         // Import menu
         private void menuImportFile(object sender, EventArgs e)
         {
-            checkIfDirty(sender, e);
-            MZImportDialog importDialog;
+            checkIfDirty(sender);
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            MZImportDialog importDialog;
             string file = "";
             
             // first, open a dialog to the CSV to import
             OpenFileDialog openFileDG = new OpenFileDialog();
 
-            if (menuItem == TXTToolStripMenuItem)
-            {
-                file = FILETYPE_TXT;
-                openFileDG.Filter = "Text files (*.txt) | *.txt";
-                openFileDG.Title = "Import Text File as List";
-            }
-            else if (menuItem == CSVToolStripMenuItem)
-            {
-                file = FILETYPE_CSV;
-                openFileDG.Filter = "Comma-separated Value Files (*.csv) | *.csv";
-                openFileDG.Title = "Import CSV as List";
-            }
-            else if (menuItem == XLSToolStripMenuItem)
-            {
-                file = FILETYPE_XLS;
-                openFileDG.Filter = "Excel files (*.xlsx;*.xls) | *.xlsx;*.xls";
-                openFileDG.Title = "Import Excel Sheet as List";
-            }
-
-            if (openFileDG.ShowDialog() == DialogResult.OK)
-            {
-                // then open a stream to the file
-                string filePath = openFileDG.FileName;
-                importDialog = new MZImportDialog(file);
-                if (importDialog.ShowDialog() == DialogResult.OK)
-                {
-                    ImportSettings settings = importDialog.settings;
-                    importFile(filePath, settings);
-                }
-            }
+            if (menuItem == TXTToolStripMenuItem) preImportChecks(FILETYPE_TXT);
+            else if (menuItem == CSVToolStripMenuItem) preImportChecks(FILETYPE_CSV);
+            else if (menuItem == XLSToolStripMenuItem) preImportChecks(FILETYPE_XLS);
+            
         }
 
         private void menuSaveAsFile(object sender, EventArgs e)
@@ -371,6 +367,28 @@ namespace Mytemize
             }
         }
 
+        private void saveFileDialog()
+        {
+            // Open up a save file dialog to collect the path;
+            if (currentFilePath == null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Mytemize files (*.myz)|*.myz|All files (*.*)|*.*";
+                saveFileDialog.Title = "Save Mytemize List";
+
+                // Proceed to save file
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    saveFile(filePath);
+                }
+            }
+            else
+            {
+                saveFile(currentFilePath);
+            }
+        }
+
         private void saveFile(string filePath)
         {
             if (activeFile != null)
@@ -379,10 +397,65 @@ namespace Mytemize
                 string json = JsonConvert.SerializeObject(activeFile, Formatting.Indented);
                 File.WriteAllText(filePath, json);
                 currentFilePath = filePath;
+                isDirty = false;
             }
         }
 
         // Import different file types into Lists here
+
+        private void preImportChecks(string fileType, string fileName = null)
+        {
+            MZImportDialog importDialog;
+            string file = "";
+            OpenFileDialog openFileDG = new OpenFileDialog();
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                if (fileType == FILETYPE_TXT)
+                {
+                    //   file = FILETYPE_TXT;
+                    openFileDG.Filter = "Text files (*.txt) | *.txt";
+                    openFileDG.Title = "Import Text File as List";
+                }
+                else if (fileType == FILETYPE_CSV)
+                {
+                    //   file = FILETYPE_CSV;
+                    openFileDG.Filter = "Comma-separated Value Files (*.csv) | *.csv";
+                    openFileDG.Title = "Import CSV as List";
+                }
+                else if (fileType == FILETYPE_XLS)
+                {
+                    //   file = FILETYPE_XLS;
+                    openFileDG.Filter = "Excel files (*.xlsx;*.xls) | *.xlsx;*.xls";
+                    openFileDG.Title = "Import Excel Sheet as List";
+                }
+
+                // first, open a dialog to the CSV to import
+                if (openFileDG.ShowDialog() == DialogResult.OK)
+                {
+                    // then open a stream to the file
+                    file = openFileDG.FileName;
+                    importDialog = new MZImportDialog(fileType);
+                    if (importDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        ImportSettings settings = importDialog.settings;
+                        importFile(file, settings);
+                    }
+                }
+            }
+            // preimportchecks was initiated by drag and drop
+            else
+            {
+                importDialog = new MZImportDialog(fileType);
+                if (importDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ImportSettings settings = importDialog.settings;
+                    importFile(fileName, settings);
+                }
+            }
+            
+        }
+
         private void importFile(string filePath, ImportSettings settings)
         {
             string fileType = settings.fileType;
@@ -578,11 +651,11 @@ namespace Mytemize
         }
 
         // method to check if file is dirty and prompt user if so
-        private void checkIfDirty(Object sender, EventArgs e)
+        private void checkIfDirty(Object sender)
         {
             if (isDirty)
             {
-                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes) menuSaveFile(sender, e);
+                if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes) saveFileDialog();
             }
         }
     }
