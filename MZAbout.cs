@@ -19,7 +19,7 @@ namespace Mytemize
 
 
             this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct + " List Builder";
+            this.labelProductName.Text = AssemblyProduct + " Listbuilder";
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + "  " + dateYear;
             this.labelCompanyName.Text = AssemblyCompany;
