@@ -194,7 +194,7 @@ namespace Mytemize
             this.tbNewItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNewItem.Location = new System.Drawing.Point(71, 4);
-            this.tbNewItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNewItem.Margin = new System.Windows.Forms.Padding(4);
             this.tbNewItem.Multiline = true;
             this.tbNewItem.Name = "tbNewItem";
             this.tbNewItem.ReadOnly = true;
@@ -215,7 +215,7 @@ namespace Mytemize
             this.btAddItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAddItem.Image = global::Mytemize.Properties.Resources.add_button;
             this.btAddItem.Location = new System.Drawing.Point(3, 4);
-            this.btAddItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btAddItem.Margin = new System.Windows.Forms.Padding(4);
             this.btAddItem.Name = "btAddItem";
             this.btAddItem.Size = new System.Drawing.Size(60, 55);
             this.btAddItem.TabIndex = 0;
@@ -228,7 +228,7 @@ namespace Mytemize
             this.panel1.Controls.Add(this.btAddItem);
             this.panel1.Controls.Add(this.tbNewItem);
             this.panel1.Location = new System.Drawing.Point(16, 622);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1019, 63);
             this.panel1.TabIndex = 2;
@@ -241,7 +241,7 @@ namespace Mytemize
             this.panel2.Controls.Add(this.panelDragDropLabel);
             this.panel2.Controls.Add(this.dgRecordsView);
             this.panel2.Location = new System.Drawing.Point(16, 87);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1019, 527);
             this.panel2.TabIndex = 3;
@@ -253,9 +253,9 @@ namespace Mytemize
             this.panelDragDropLabel.Controls.Add(this.lblDragDrop);
             this.panelDragDropLabel.Enabled = false;
             this.panelDragDropLabel.Location = new System.Drawing.Point(4, 4);
-            this.panelDragDropLabel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelDragDropLabel.Margin = new System.Windows.Forms.Padding(4);
             this.panelDragDropLabel.Name = "panelDragDropLabel";
-            this.panelDragDropLabel.Size = new System.Drawing.Size(1009, 519);
+            this.panelDragDropLabel.Size = new System.Drawing.Size(1011, 519);
             this.panelDragDropLabel.TabIndex = 2;
             this.panelDragDropLabel.Visible = false;
             this.panelDragDropLabel.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragDrop);
@@ -267,7 +267,7 @@ namespace Mytemize
             this.lblDragDrop.AutoSize = true;
             this.lblDragDrop.BackColor = System.Drawing.Color.Transparent;
             this.lblDragDrop.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDragDrop.Location = new System.Drawing.Point(261, 239);
+            this.lblDragDrop.Location = new System.Drawing.Point(261, 242);
             this.lblDragDrop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDragDrop.Name = "lblDragDrop";
             this.lblDragDrop.Size = new System.Drawing.Size(373, 40);
@@ -291,7 +291,7 @@ namespace Mytemize
             this.colDescription});
             this.dgRecordsView.GridColor = System.Drawing.Color.DarkGreen;
             this.dgRecordsView.Location = new System.Drawing.Point(4, 4);
-            this.dgRecordsView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgRecordsView.Margin = new System.Windows.Forms.Padding(4);
             this.dgRecordsView.MultiSelect = false;
             this.dgRecordsView.Name = "dgRecordsView";
             this.dgRecordsView.RowHeadersVisible = false;
@@ -302,6 +302,7 @@ namespace Mytemize
             this.dgRecordsView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCellContentUpdate);
             this.dgRecordsView.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragDrop);
             this.dgRecordsView.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragEnter);
+            this.dgRecordsView.DragLeave += new System.EventHandler(this.dgvArea_DragLeave);
             // 
             // colRemove
             // 
@@ -338,12 +339,12 @@ namespace Mytemize
             this.tbTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(240)))), ((int)(((byte)(140)))));
             this.tbTitle.Location = new System.Drawing.Point(0, 24);
-            this.tbTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbTitle.Margin = new System.Windows.Forms.Padding(4);
             this.tbTitle.MaxLength = 52;
             this.tbTitle.MinimumSize = new System.Drawing.Size(1045, 33);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(1045, 33);
+            this.tbTitle.Size = new System.Drawing.Size(1045, 30);
             this.tbTitle.TabIndex = 4;
             this.tbTitle.Text = "Checklist Title";
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -373,13 +374,15 @@ namespace Mytemize
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1061, 729);
             this.Name = "mzEditor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Mytemize Listbuilder";
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvArea_DragEnter);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.form_keyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

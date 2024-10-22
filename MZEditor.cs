@@ -253,8 +253,6 @@ namespace Mytemize
         {
             checkIfDirty(sender);
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            MZImportDialog importDialog;
-            string file = "";
             
             // first, open a dialog to the CSV to import
             OpenFileDialog openFileDG = new OpenFileDialog();
@@ -300,6 +298,18 @@ namespace Mytemize
         {
             MZAbout aboutWindow = new MZAbout();
             aboutWindow.ShowDialog();
+        }
+
+        // keypress detection such as ctrl+S keyword
+        private void form_keyDown(Object sender, KeyEventArgs e)
+        {
+            // ctrl + S action
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                if (isDirty && !string.IsNullOrEmpty(currentFilePath)) saveFile(currentFilePath);
+                else saveFileDialog();
+                e.SuppressKeyPress = true; // prevent from bubbling into other controls
+            }
         }
 
         /*
@@ -431,25 +441,35 @@ namespace Mytemize
                 // first, open a dialog to the CSV to import
                 if (openFileDG.ShowDialog() == DialogResult.OK)
                 {
-                    // then open a stream to the file
                     file = openFileDG.FileName;
-                    importDialog = new MZImportDialog(fileType);
-                    if (importDialog.ShowDialog() == DialogResult.OK)
+
+                    // Check first if the selected file is not busy or opened in a different program
+                    if (checkFileIsAvailable(file))
                     {
-                        ImportSettings settings = importDialog.settings;
-                        importFile(file, settings);
+                        importDialog = new MZImportDialog(fileType);
+                        if (importDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            ImportSettings settings = importDialog.settings;
+                            importFile(file, settings);
+                        }
                     }
+                    else MessageBox.Show("Unable to import file as list: File is open in another program.", "Import Error");
+
                 }
             }
             // preimportchecks was initiated by drag and drop
             else
             {
-                importDialog = new MZImportDialog(fileType);
-                if (importDialog.ShowDialog() == DialogResult.OK)
+                if (checkFileIsAvailable(fileName))
                 {
-                    ImportSettings settings = importDialog.settings;
-                    importFile(fileName, settings);
+                    importDialog = new MZImportDialog(fileType);
+                    if (importDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        ImportSettings settings = importDialog.settings;
+                        importFile(fileName, settings);
+                    }
                 }
+                else MessageBox.Show("Unable to import file as list: File is open in another program.", "Import Error");
             }
             
         }
@@ -597,6 +617,22 @@ namespace Mytemize
                         rowID++;
                     }
                 }
+            }
+        }
+
+        private bool checkFileIsAvailable(string filePath)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(filePath)) return false;
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    return true;
+                }
+            }
+            catch (IOException)
+            {
+                return false;
             }
         }
 
