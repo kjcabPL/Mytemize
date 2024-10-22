@@ -195,7 +195,8 @@ namespace Mytemize
                 {
                     checkIfDirty(sender); // check first if document is dirty and prompt user to save changes if so
                     string file = files[0];
-                    if (Path.GetExtension(file).Equals(".csv", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_CSV, file);
+                    if (Path.GetExtension(file).Equals(".myz", StringComparison.OrdinalIgnoreCase)) openFile(file);
+                    else if (Path.GetExtension(file).Equals(".csv", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_CSV, file);
                     else if (Path.GetExtension(file).Equals(".txt", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_TXT, file);
                     else if (Path.GetExtension(file).Equals(".xls", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(file).Equals(".xlsx", StringComparison.OrdinalIgnoreCase)) preImportChecks(FILETYPE_XLS, file);
                     else MessageBox.Show("Unable to import file as list: File type not supported.", "Import Error");
