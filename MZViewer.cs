@@ -307,6 +307,7 @@ namespace Mytemize
                 MessageBox.Show("An error has occurred while reading the list: " + currentPath + ":\n " + err.Message);
             }
         }
+
         private void openFile()
         {
             if (activeFile == null) return;
@@ -417,7 +418,7 @@ namespace Mytemize
         {
             // cast to int because progress bar's value only allows integers. Ensures the cap is 100
             pbProgress.Value = (int) Math.Min(Math.Round(activeFile.checkProgress(), MidpointRounding.AwayFromZero), 100);
-            lblProgress.Text = activeFile.checkCompletedEntries().ToString() + " out of  " + activeFile.Count.ToString();
+            lblProgress.Text = activeFile.checkCompletedEntries().ToString() + " out of " + activeFile.Count.ToString();
         }
 
         // Opens the settings window

@@ -70,7 +70,8 @@ namespace Mytemize
                 tb.ReadOnly = true;
                 if (tb == tbTitle && activeFile != null)
                 {
-                    if (tbTitle.Text == "") tbTitle.Text = PLACEHOLDER_TITLE;
+                    if (string.IsNullOrEmpty(tbTitle.Text)) tbTitle.Text = PLACEHOLDER_TITLE;
+                    else isDirty = true;
                     activeFile.Title = tbTitle.Text;
                 }
                 else if (tb == tbNewItem)
@@ -178,10 +179,7 @@ namespace Mytemize
         private void dgvArea_DragEnter(object sender, DragEventArgs e)
         {
             panelDragDropLabel.Visible = true;
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
             else e.Effect = DragDropEffects.None;
             
         }
