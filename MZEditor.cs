@@ -313,6 +313,22 @@ namespace Mytemize
             }
         }
 
+        // keypress detection specific for tbNewItem
+        private void tbNewItem_keyDown(Object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(tbNewItem.Text))
+                {
+                    if (activeFile.addRecord(tbNewItem.Text))
+                    {
+                        updateFileTable();
+                        tbNewItem.Text = PLACEHOLDER_ITEM;
+                    }
+                }
+            }
+        }
+
         /*
          * File operations start here.
          */

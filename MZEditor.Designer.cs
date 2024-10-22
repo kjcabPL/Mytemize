@@ -202,6 +202,7 @@ namespace Mytemize
             this.tbNewItem.TabIndex = 1;
             this.tbNewItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbNewItem.Click += new System.EventHandler(this.tbEnable);
+            this.tbNewItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNewItem_keyDown);
             this.tbNewItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNewItem_KeyPress);
             this.tbNewItem.Leave += new System.EventHandler(this.tbDisable);
             this.tbNewItem.LostFocus += new System.EventHandler(this.tbDisable);
