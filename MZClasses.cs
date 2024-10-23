@@ -119,6 +119,7 @@ namespace Mytemize
         public string title;
         public List<MZRecord> items;
         public int count;
+        public bool isTracked = false;
 
         // getters and setters
         [JsonIgnore]

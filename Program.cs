@@ -17,6 +17,8 @@ namespace Mytemize
         [STAThread]
         static void Main(string[] args)
         {
+            MZTracker myTracker = null;
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -37,9 +39,9 @@ namespace Mytemize
             else if (args.Length > 0 && (args[0] == "-i" || args[0] == "-I"))
             {
                 if (args.Length > 1 &&
-                    (args[1] == "-csv" || args[1] == "-CSV") ||
-                    (args[1] == "-xls" || args[1] == "-XLS") ||
-                    (args[1] == "-txt" || args[1] == "-TXT")
+                    (args[1].ToLower() == "-csv") ||
+                    (args[1].ToLower() == "-xls") || 
+                    (args[1].ToLower() == "-txt")
                     )
                 {
                     string fileType = args[1].ToUpper();
@@ -53,6 +55,33 @@ namespace Mytemize
                     else MessageBox.Show("Application Error: No file specified for import action", "ERROR");
                 }
                 else MessageBox.Show("Application Error: Invalid parameters for import action", "ERROR");
+            }
+            // check for the -t parameter to start the tracker tray icon
+            else if (args.Length > 0 && (args[0] == "-t" || args[0] == "-T"))
+            {
+                if (args.Length > 1)
+                {
+                    if (args[1].ToLower() == "-start")
+                    {
+                        if (myTracker == null)
+                        {
+                            // make sure only one tracker icon is running at a time
+                            myTracker = new MZTracker();
+                            Application.Run(myTracker);
+                        }
+                        else MessageBox.Show("Application Error: List Tracker is already active ", "ERROR");
+                    }
+                    else if (args[1].ToLower() == "-stop")
+                    {
+                        if (myTracker != null)
+                        {
+                            myTracker.Close();
+                            myTracker = null; // force remove the reference to the tracker to properly dispose it
+                        }
+                    }
+                    else MessageBox.Show("Application Error: Invalid tracker action: " + args[1], "ERROR");
+                }
+                else MessageBox.Show("Application Error: No tracker action specified", "ERROR");
             }
             else
             {

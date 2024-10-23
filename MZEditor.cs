@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,21 +22,21 @@ namespace Mytemize
 
     public partial class mzEditor : Form
     {
-        const string PLACEHOLDER_TITLE = "Checklist Title";
-        const string PLACEHOLDER_ITEM = "New List Item";
+        const string PLACEHOLDER_TITLE = "Checklist Title", PLACEHOLDER_ITEM = "New List Item";
         const string COL_REMOVE = "colRemove", COL_OPTIONS = "colOptions", COL_DESCRIPTION = "colDescription";
-        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", FILETYPE_TXT = "TXT", EMPTYCELL = "$$_EMPTY_$$";
+        const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", FILETYPE_TXT = "TXT", EMPTYCELL = "$$_EMPTY_$$", LISTFILE = "lists.txt";
 
         // only have one file opened at a time to prevent complications
         internal MZList activeFile;
 
         public string currentFilePath = null;
         public int recordCount;
-        public bool isDirty = false;
+        public bool isDirty = false, trackerActive = false;
 
         public mzEditor(string action = null, string filePath = "", string type = "")
         {
             InitializeComponent();
+            createListFile();
 
             // check if any arguments were passed into the program
             if (!string.IsNullOrEmpty(action))
@@ -249,21 +250,6 @@ namespace Mytemize
             saveFileDialog();
         }
 
-        // Import menu
-        private void menuImportFile(object sender, EventArgs e)
-        {
-            checkIfDirty(sender);
-            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            
-            // first, open a dialog to the CSV to import
-            OpenFileDialog openFileDG = new OpenFileDialog();
-
-            if (menuItem == TXTToolStripMenuItem) preImportChecks(FILETYPE_TXT);
-            else if (menuItem == CSVToolStripMenuItem) preImportChecks(FILETYPE_CSV);
-            else if (menuItem == XLSToolStripMenuItem) preImportChecks(FILETYPE_XLS);
-            
-        }
-
         private void menuSaveAsFile(object sender, EventArgs e)
         {
             // Open up a save file dialog to collect the path;
@@ -277,6 +263,21 @@ namespace Mytemize
                 string filePath = saveFileDialog.FileName;
                 saveFile(filePath);
             }
+        }
+
+        // Import menu
+        private void menuImportFile(object sender, EventArgs e)
+        {
+            checkIfDirty(sender);
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+
+            // first, open a dialog to the CSV to import
+            OpenFileDialog openFileDG = new OpenFileDialog();
+
+            if (menuItem == TXTToolStripMenuItem) preImportChecks(FILETYPE_TXT);
+            else if (menuItem == CSVToolStripMenuItem) preImportChecks(FILETYPE_CSV);
+            else if (menuItem == XLSToolStripMenuItem) preImportChecks(FILETYPE_XLS);
+
         }
 
         // Opens the edited file in the viewer. Does not open if changes weren't made 
@@ -295,6 +296,14 @@ namespace Mytemize
             else MessageBox.Show("List is empty", "Warning", MessageBoxButtons.OK);
         }
 
+        // Start/Stop the tracker
+        private void menuStartTracker(object sender, EventArgs e)
+        {
+            // start the tracker via another process to make it independent of this form
+            Process.Start("Mytemize.exe", "-t -start");
+        }
+
+        // Open the About form
         private void menuAbout(object sender, EventArgs e)
         {
             MZAbout aboutWindow = new MZAbout();
@@ -707,6 +716,15 @@ namespace Mytemize
             if (isDirty)
             {
                 if (MessageBox.Show("Save Changes to the current list?", "Save Changes", MessageBoxButtons.YesNo) == DialogResult.Yes) saveFileDialog();
+            }
+        }
+
+        // Create a list file for the tracker if it's not present yet
+        private void createListFile()
+        {
+            if (!File.Exists(LISTFILE))
+            {
+                File.WriteAllText(LISTFILE, "");
             }
         }
     }
