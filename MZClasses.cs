@@ -116,7 +116,7 @@ namespace Mytemize
      */
     internal class MZList
     {
-        public string title;
+        public string title, filePath;
         public List<MZRecord> items;
         public int count;
         public bool isTracked = false;
@@ -190,14 +190,9 @@ namespace Mytemize
             // If not null, then we found the item and can remove it
             if (item != null)
             {
-                Debug.WriteLine("Removing Item: " + item.ID);
                 items.Remove(item);
                 count = items.Count;
                 removed = true;
-            }
-            else
-            {
-                Debug.WriteLine("Record with " + id + " not found.");
             }
 
             return removed;
@@ -207,7 +202,6 @@ namespace Mytemize
         public float checkProgress()
         {
             if (items.Count <= 0) return 100f; // return full count if there are no entries because why would there be any progress on it?
-
             float done = 0f;
 
             for (int i = 0; i < items.Count; i++)
@@ -239,7 +233,7 @@ namespace Mytemize
 
     }
 
-    /**
+    /*
      * Import Settings - A settings class used to refer to how an Import File should parse the data within the file like CSV or XLS
      * 
      */

@@ -12,12 +12,14 @@ namespace Mytemize
 {
     public partial class MZViewerSettings : Form
     {
-        public bool isDisplayPB = true, isMinToTray = false, isPinToDesktop = false;
+        public bool isDemo = false, isDisplayPB = true, isMinToTray = false, isPinToDesktop = false, isTracked = false;
 
-        public MZViewerSettings(bool displayPB, bool minToTray, bool pinToDesktop = false)
+        public MZViewerSettings(bool isdemo, bool displayPB, bool minToTray, bool pinToDesktop = false, bool trackList = false)
         {
+            isDemo = isdemo;
             isDisplayPB = displayPB;
             isMinToTray = minToTray;
+            isTracked = trackList;
             
             // If minimize to tray is enabled, disable pinToDesktop by default
             if (!isMinToTray) isPinToDesktop = pinToDesktop;
@@ -48,7 +50,9 @@ namespace Mytemize
             cbEnablePBar.Checked = isDisplayPB;
             cbMinToTray.Checked = isMinToTray;
             cbPinToDesktop.Checked = isPinToDesktop;
+            cbAddToTracker.Checked = isTracked;
 
+            // if (isDemo) cbAddToTracker.Enabled = false;
             if (isMinToTray) cbPinToDesktop.Enabled = false;
         }
 
@@ -60,6 +64,7 @@ namespace Mytemize
                 isDisplayPB = cbEnablePBar.Checked;
                 isMinToTray = cbMinToTray.Checked;
                 isPinToDesktop = cbPinToDesktop.Checked;
+                isTracked = cbAddToTracker.Checked;
                 this.DialogResult = DialogResult.OK;
             }
             else if (bt == btCancel)

@@ -33,9 +33,10 @@ namespace Mytemize
             this.btOK = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.cbPinToDesktop = new System.Windows.Forms.CheckBox();
             this.cbMinToTray = new System.Windows.Forms.CheckBox();
             this.cbEnablePBar = new System.Windows.Forms.CheckBox();
-            this.cbPinToDesktop = new System.Windows.Forms.CheckBox();
+            this.cbAddToTracker = new System.Windows.Forms.CheckBox();
             this.panelSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@ namespace Mytemize
             this.btOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btOK.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btOK.Location = new System.Drawing.Point(13, 136);
+            this.btOK.Location = new System.Drawing.Point(13, 158);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(75, 23);
             this.btOK.TabIndex = 0;
@@ -66,7 +67,7 @@ namespace Mytemize
             this.btCancel.FlatAppearance.BorderSize = 0;
             this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btCancel.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btCancel.Location = new System.Drawing.Point(108, 136);
+            this.btCancel.Location = new System.Drawing.Point(108, 158);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(75, 23);
             this.btCancel.TabIndex = 1;
@@ -78,19 +79,30 @@ namespace Mytemize
             // 
             this.panelSettings.BackColor = System.Drawing.Color.Transparent;
             this.panelSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSettings.Controls.Add(this.cbAddToTracker);
             this.panelSettings.Controls.Add(this.cbPinToDesktop);
             this.panelSettings.Controls.Add(this.cbMinToTray);
             this.panelSettings.Controls.Add(this.cbEnablePBar);
             this.panelSettings.Location = new System.Drawing.Point(13, 13);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Padding = new System.Windows.Forms.Padding(5);
-            this.panelSettings.Size = new System.Drawing.Size(170, 112);
+            this.panelSettings.Size = new System.Drawing.Size(170, 136);
             this.panelSettings.TabIndex = 2;
+            // 
+            // cbPinToDesktop
+            // 
+            this.cbPinToDesktop.AutoSize = true;
+            this.cbPinToDesktop.Location = new System.Drawing.Point(20, 91);
+            this.cbPinToDesktop.Name = "cbPinToDesktop";
+            this.cbPinToDesktop.Size = new System.Drawing.Size(100, 17);
+            this.cbPinToDesktop.TabIndex = 2;
+            this.cbPinToDesktop.Text = "Pin To Desktop";
+            this.cbPinToDesktop.UseVisualStyleBackColor = true;
             // 
             // cbMinToTray
             // 
             this.cbMinToTray.AutoSize = true;
-            this.cbMinToTray.Location = new System.Drawing.Point(20, 45);
+            this.cbMinToTray.Location = new System.Drawing.Point(20, 67);
             this.cbMinToTray.Name = "cbMinToTray";
             this.cbMinToTray.Size = new System.Drawing.Size(102, 17);
             this.cbMinToTray.TabIndex = 1;
@@ -101,29 +113,29 @@ namespace Mytemize
             // cbEnablePBar
             // 
             this.cbEnablePBar.AutoSize = true;
-            this.cbEnablePBar.Location = new System.Drawing.Point(20, 22);
+            this.cbEnablePBar.Location = new System.Drawing.Point(20, 44);
             this.cbEnablePBar.Name = "cbEnablePBar";
             this.cbEnablePBar.Size = new System.Drawing.Size(116, 17);
             this.cbEnablePBar.TabIndex = 0;
             this.cbEnablePBar.Text = "Show Progress Bar";
             this.cbEnablePBar.UseVisualStyleBackColor = true;
             // 
-            // cbPinToDesktop
+            // cbAddToTracker
             // 
-            this.cbPinToDesktop.AutoSize = true;
-            this.cbPinToDesktop.Location = new System.Drawing.Point(20, 69);
-            this.cbPinToDesktop.Name = "cbPinToDesktop";
-            this.cbPinToDesktop.Size = new System.Drawing.Size(100, 17);
-            this.cbPinToDesktop.TabIndex = 2;
-            this.cbPinToDesktop.Text = "Pin To Desktop";
-            this.cbPinToDesktop.UseVisualStyleBackColor = true;
+            this.cbAddToTracker.AutoSize = true;
+            this.cbAddToTracker.Location = new System.Drawing.Point(20, 21);
+            this.cbAddToTracker.Name = "cbAddToTracker";
+            this.cbAddToTracker.Size = new System.Drawing.Size(120, 17);
+            this.cbAddToTracker.TabIndex = 3;
+            this.cbAddToTracker.Text = "Add To List Tracker";
+            this.cbAddToTracker.UseVisualStyleBackColor = true;
             // 
             // MZViewerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Mytemize.Properties.Resources.myzViewerBG;
-            this.ClientSize = new System.Drawing.Size(194, 171);
+            this.ClientSize = new System.Drawing.Size(194, 191);
             this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btOK);
@@ -152,5 +164,6 @@ namespace Mytemize
         private System.Windows.Forms.CheckBox cbMinToTray;
         private System.Windows.Forms.CheckBox cbEnablePBar;
         private System.Windows.Forms.CheckBox cbPinToDesktop;
+        private System.Windows.Forms.CheckBox cbAddToTracker;
     }
 }

@@ -18,6 +18,7 @@ namespace Mytemize
 {
     public partial class MZViewer : Form
     {
+        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER";
         const string COL_ITEM = "colItems", COL_BUTTON = "colTickbox";
 
         // styles for the DGV cells
@@ -29,9 +30,9 @@ namespace Mytemize
         Image[] imgBtSettings;
 
         internal MZList activeFile;
-        string currentPath = null;
+        string currentPath = null, lastKnownPath = null, listFile = LISTFILE;
 
-        bool isDemo = false, isDragging = false, minimizeToTray = false, showProgressBar = true, pinToDesktop = false;
+        bool isDemo = false, isDragging = false, minimizeToTray = false, showProgressBar = true, pinToDesktop = false, isTracked = false, isTrackedBefore = false;
         Point ptDragCursor, ptDragForm;
         
         public MZViewer(string filePath = null, bool demo = false)
@@ -46,6 +47,7 @@ namespace Mytemize
             if (isDemo) lblDemoOnly.Visible = true;
             if (filePath != null && filePath != "") {
                 currentPath = filePath;
+                lastKnownPath = currentPath; // lastKnownPath will be used to check what the previously added filePath on the tracker was
                 readFilePath();
                 updateWindowInfo();
             }
@@ -62,6 +64,10 @@ namespace Mytemize
         // load resources and prepare styles here
         private void loadResources()
         {
+            // check tracker file path and update current listFile
+            string pathCheck = Environment.GetEnvironmentVariable(ENVLISTPATH);
+            if (!string.IsNullOrEmpty(pathCheck)) listFile = pathCheck;
+
             // load up images
             imgIncomplete = loadEmbeddedImage("Mytemize.Resources.clickbox_empty.bmp");
             imgHover = loadEmbeddedImage("Mytemize.Resources.clickbox_hover.bmp");
@@ -223,7 +229,11 @@ namespace Mytemize
         private void button_click(Object sender, EventArgs e)
         {
             Button bt = sender as Button;
-            if (bt == btClose) this.Close();
+            if (bt == btClose)
+            {
+                updateTrackList();
+                this.Close();
+            }
             if (bt == btMini) {
                 this.WindowState = FormWindowState.Minimized;
                 if (minimizeToTray && this.WindowState == FormWindowState.Minimized)
@@ -286,6 +296,8 @@ namespace Mytemize
                     {
                         // change the title text
                         lbTitle.Text = activeFile.title;
+                        isTracked = activeFile.isTracked;
+                        isTrackedBefore = isTracked;
 
                         for (int i = 0; i <= activeFile.Count; i++)
                         {
@@ -343,8 +355,6 @@ namespace Mytemize
             this.Enabled = true;
             updateProgress();
         }
-
-        // Save file is called every time a status is clicked
 
 
         /*
@@ -424,13 +434,18 @@ namespace Mytemize
         // Opens the settings window
         private void openSettingsWindow()
         {
-            MZViewerSettings settings = new MZViewerSettings(showProgressBar, minimizeToTray, pinToDesktop);
+            MZViewerSettings settings = new MZViewerSettings(isDemo, showProgressBar, minimizeToTray, pinToDesktop);
 
             if (settings.ShowDialog() == DialogResult.OK)
             {
                 showProgressBar = settings.isDisplayPB;
                 minimizeToTray = settings.isMinToTray;
                 pinToDesktop = settings.isPinToDesktop;
+                isTracked = settings.isTracked;
+                if (isTracked != isTrackedBefore)
+                {
+                    saveFile();
+                }
             }
             updateWindowInfo();
         }
@@ -476,6 +491,80 @@ namespace Mytemize
         {
             // stop dragging
             isDragging = false;
+        }
+        
+        // record the file's current location if it is tracked or vice-versa
+        private void updateTrackList()
+        {
+            // if the list was tracked before but isn't now, then remove the file's entry from the tracker
+            if (!isTracked && isTrackedBefore)
+            {
+                // remove the lists' path from the file
+                if (File.Exists(listFile))
+                {
+                    bool isPresent = false;
+                    string linesToWrite = "";
+                    // Check if the list file has the file path available, then write if not yet
+                    using (FileStream fs = new FileStream(listFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var sr = new StreamReader(fs))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {                            
+                            line = line.Trim();
+                            if (String.Equals(line, currentPath, StringComparison.OrdinalIgnoreCase))
+                            {
+                                isPresent = true; // found it, now filter it out
+                            }
+                            else linesToWrite += line + "\n\r";
+                        }
+                    }
+
+                    // rewrite the list file
+                    if (!isPresent)
+                    {
+                        using (StreamWriter sw = new StreamWriter(listFile))
+                        {
+                            sw.Write(linesToWrite);
+                        }
+                    }
+                }
+                else MessageBox.Show("Application Error: Unable to track file - list file not found. ", "ERROR");
+            }
+            // if is now tracked and was not tracked before
+            else if (isTracked && !isTrackedBefore)
+            {
+                // Look for the list file
+                if (File.Exists(listFile))
+                {
+                    bool isPresent = false;
+                    // Check if the list file has the file path available, then write if not yet
+                    using (FileStream fs = new FileStream(listFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var sr = new StreamReader(fs))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            line = line.Trim();
+                            if (String.Equals(line, currentPath, StringComparison.OrdinalIgnoreCase))
+                            {
+                                isPresent = true; //it's already here, no need to record
+                                break;
+                            }
+                        }
+                    }
+
+                    // We did not find the file yet, better record the file
+                    if (!isPresent)
+                    {
+                        using (StreamWriter sw = File.AppendText(listFile))
+                        {
+                            sw.WriteLine(currentPath);
+                        }       
+                    }
+                }
+                else MessageBox.Show("Application Error: Unable to track file - list file not found. ", "ERROR");
+            }
         }
 
         // Load the background image as a semi-transparent object
