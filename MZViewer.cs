@@ -434,7 +434,7 @@ namespace Mytemize
         // Opens the settings window
         private void openSettingsWindow()
         {
-            MZViewerSettings settings = new MZViewerSettings(isDemo, showProgressBar, minimizeToTray, pinToDesktop);
+            MZViewerSettings settings = new MZViewerSettings(isDemo, showProgressBar, minimizeToTray, pinToDesktop, isTracked);
 
             if (settings.ShowDialog() == DialogResult.OK)
             {
@@ -444,6 +444,7 @@ namespace Mytemize
                 isTracked = settings.isTracked;
                 if (isTracked != isTrackedBefore)
                 {
+                    activeFile.isTracked = isTracked;
                     saveFile();
                 }
             }
@@ -521,12 +522,9 @@ namespace Mytemize
                     }
 
                     // rewrite the list file
-                    if (!isPresent)
+                    using (StreamWriter sw = new StreamWriter(listFile))
                     {
-                        using (StreamWriter sw = new StreamWriter(listFile))
-                        {
-                            sw.Write(linesToWrite);
-                        }
+                        sw.Write(linesToWrite);
                     }
                 }
                 else MessageBox.Show("Application Error: Unable to track file - list file not found. ", "ERROR");

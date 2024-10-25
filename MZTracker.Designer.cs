@@ -41,7 +41,7 @@ namespace Mytemize
             // 
             this.trayTracker.ContextMenuStrip = this.cMenuTrackedLists;
             this.trayTracker.Icon = ((System.Drawing.Icon)(resources.GetObject("trayTracker.Icon")));
-            this.trayTracker.Text = "notifyIcon1";
+            this.trayTracker.Text = "Mytemize List Tracker";
             this.trayTracker.Visible = true;
             this.trayTracker.Click += new System.EventHandler(this.trayIconClicked);
             // 
