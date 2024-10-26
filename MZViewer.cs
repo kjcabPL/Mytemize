@@ -553,7 +553,7 @@ namespace Mytemize
                         sw.Write(linesToWrite);
                     }
                 }
-                else MessageBox.Show("Application Error: Unable to track file - list file not found. ", "ERROR");
+                else MessageBox.Show("Unable to track file - list file not found. ", "ERROR");
             }
             // if is now tracked and was not tracked before
             else if (isTracked && !isTrackedBefore)
@@ -587,7 +587,7 @@ namespace Mytemize
                         }       
                     }
                 }
-                else MessageBox.Show("Application Error: Unable to track file - list file not found. ", "ERROR");
+                else MessageBox.Show("Unable to track file - list file not found. ", "ERROR");
             }
         }
 

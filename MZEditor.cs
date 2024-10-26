@@ -722,10 +722,7 @@ namespace Mytemize
         // Create a list file for the tracker if it's not present yet
         private void createListFile()
         {
-            if (!File.Exists(LISTFILE))
-            {
-                File.WriteAllText(LISTFILE, "");
-            }
+            if (!File.Exists(LISTFILE)) File.WriteAllText(LISTFILE, "");
         }
     }
 
@@ -736,7 +733,6 @@ namespace Mytemize
         public int entryID, rowID;
         public RecordState recordState;
 
-        //constructor
         public ButtonTagData (int entry = 0, int row = 0, RecordState state = RecordState.INCOMPLETE)
         {
             entryID = entry;

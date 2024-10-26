@@ -163,6 +163,11 @@ namespace Mytemize
         private void openMytemizeList(string filePath)
         {
             if (string.IsNullOrEmpty(filePath)) return;
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.");
+                return;
+            }
 
             try
             {
@@ -173,7 +178,7 @@ namespace Mytemize
             }
             catch (IOException)
             {
-                MessageBox.Show("Application Error: Unable to open list file: " + filePath);
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.");
             }
         }
     }
