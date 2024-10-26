@@ -22,14 +22,14 @@ namespace Mytemize
 
     public partial class mzEditor : Form
     {
-        const string PLACEHOLDER_TITLE = "Checklist Title", PLACEHOLDER_ITEM = "New List Item";
+        const string PLACEHOLDER_TITLE = "Checklist Title", PLACEHOLDER_ITEM = "New List Item", ENVLISTPATH = "MYZTRACKER", STUDIONAME = "Bitknvs Studio", APPNAME = "Mytemize";
         const string COL_REMOVE = "colRemove", COL_OPTIONS = "colOptions", COL_DESCRIPTION = "colDescription";
         const string FILETYPE_CSV = "CSV", FILETYPE_XLS = "XLS", FILETYPE_TXT = "TXT", EMPTYCELL = "$$_EMPTY_$$", LISTFILE = "lists.txt";
 
         // only have one file opened at a time to prevent complications
         internal MZList activeFile;
 
-        public string currentFilePath = null;
+        public string currentFilePath = null, listFile = LISTFILE;
         public int recordCount;
         public bool isDirty = false, trackerActive = false;
 
@@ -722,7 +722,12 @@ namespace Mytemize
         // Create a list file for the tracker if it's not present yet
         private void createListFile()
         {
-            if (!File.Exists(LISTFILE)) File.WriteAllText(LISTFILE, "");
+            // write to appdata instead of program files due to elevated privilege issues
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), STUDIONAME, APPNAME, LISTFILE);
+            string listDir = Path.GetDirectoryName(appDataPath);
+            listFile = appDataPath;
+            if (!Directory.Exists(listDir)) Directory.CreateDirectory(listDir);
+            if (!File.Exists(listFile)) File.WriteAllText(listFile, "");
         }
     }
 

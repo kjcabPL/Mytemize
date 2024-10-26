@@ -18,7 +18,7 @@ namespace Mytemize
 {
     public partial class MZViewer : Form
     {
-        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER";
+        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER", STUDIONAME = "Bitknvs Studio", APPNAME = "Mytemize";
         const string COL_ITEM = "colItems", COL_BUTTON = "colTickbox";
 
         // styles for the DGV cells
@@ -65,8 +65,12 @@ namespace Mytemize
         private void loadResources()
         {
             // check tracker file path and update current listFile
-            string pathCheck = Environment.GetEnvironmentVariable(ENVLISTPATH);
-            if (!string.IsNullOrEmpty(pathCheck)) listFile = pathCheck;
+            
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), STUDIONAME, APPNAME, LISTFILE);
+            string listDir = Path.GetDirectoryName(appDataPath);
+            listFile = appDataPath;
+            if (!Directory.Exists(listDir)) Directory.CreateDirectory(listDir);
+            if (!File.Exists(listFile)) File.WriteAllText(listFile, "");
 
             // load up images
             imgIncomplete = loadEmbeddedImage("Mytemize.Resources.clickbox_empty.bmp");

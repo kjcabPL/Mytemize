@@ -16,7 +16,7 @@ namespace Mytemize
 {
     public partial class MZTracker : Form
     {
-        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER";
+        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER", STUDIONAME = "Bitknvs Studio", APPNAME = "Mytemize";
 
         FileSystemWatcher listWatcher;
         string envListPath = LISTFILE;
@@ -86,13 +86,12 @@ namespace Mytemize
         // check if a list file is present via the environment path and start tracking if it is
         private void checkListFile()
         {
-            string pathCheck = Environment.GetEnvironmentVariable(ENVLISTPATH);
-            if (!string.IsNullOrEmpty(pathCheck))
-            {
-                envListPath = pathCheck;
-            }
-
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), STUDIONAME, APPNAME, LISTFILE);
+            string listDir = Path.GetDirectoryName(appDataPath);
+            envListPath = appDataPath;
+            if (!Directory.Exists(listDir)) Directory.CreateDirectory(listDir);
             if (!File.Exists(envListPath)) File.WriteAllText(envListPath, "");
+            
             try
             {
                 using (FileStream fs = new FileStream(envListPath, FileMode.Open, FileAccess.Read, FileShare.None))
@@ -107,6 +106,7 @@ namespace Mytemize
                 }
             }
             catch (IOException) { }
+            
         }
 
         // Add each list read from filepaths from the listfile found
