@@ -517,7 +517,7 @@ namespace Mytemize
                             {
                                 isPresent = true; // found it, now filter it out
                             }
-                            else linesToWrite += line + "\n\r";
+                            else linesToWrite += line + "\r\n";
                         }
                     }
 

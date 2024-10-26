@@ -285,7 +285,7 @@ namespace Mytemize
         {
             if (activeFile != null && activeFile.Count > 0)
             {
-                MZViewer viewer = new MZViewer(currentFilePath, true);
+                MZViewer viewer = new MZViewer(currentFilePath, false);
                 if (isDirty)
                 {
                     // in case the user opens the file and has made changes to it, show the current file changes

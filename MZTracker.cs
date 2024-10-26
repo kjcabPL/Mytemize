@@ -17,12 +17,13 @@ namespace Mytemize
     public partial class MZTracker : Form
     {
         const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER";
+
+        FileSystemWatcher listWatcher;
         string envListPath = LISTFILE;
         public MZTracker()
         {
             InitializeComponent();
             startTracker();
-
         }
 
         // override the display of the form on load - only show the notify icon
@@ -37,6 +38,7 @@ namespace Mytemize
         {
             checkListFile();
             addTrackedLists();
+
             trayTracker.Visible = true;
         }
 
@@ -64,10 +66,19 @@ namespace Mytemize
         }
 
         /*
+         * File Operations
+         */
+
+        private void updateOnFileChanged(Object sender, FileSystemEventArgs e)
+        {
+            addTrackedLists();
+        }
+
+        /*
          *  Misc Operations
          */
 
-        // check if a list file is present via the environment path, and if not, create one
+        // check if a list file is present via the environment path and start tracking if it is
         private void checkListFile()
         {
             string pathCheck = Environment.GetEnvironmentVariable(ENVLISTPATH);
@@ -80,7 +91,12 @@ namespace Mytemize
             {
                 using (FileStream fs = new FileStream(envListPath, FileMode.Open, FileAccess.Read, FileShare.None))
                 {
-                    // MessageBox.Show("List File detected");
+                    string dir = Path.GetDirectoryName(envListPath);
+                    listWatcher = new FileSystemWatcher(dir, LISTFILE);
+                    listWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                    listWatcher.Changed += updateOnFileChanged;
+                    listWatcher.Created += updateOnFileChanged;
+                    listWatcher.EnableRaisingEvents = true;
                 }
             }
             catch (IOException)
