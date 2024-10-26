@@ -159,7 +159,7 @@ namespace Mytemize
             if (item != null) {
                 items.Add(item);
                 count = items.Count;
-                val = true; // set to true if successful
+                val = true;
             }
             return val;
         }
@@ -187,7 +187,6 @@ namespace Mytemize
             MZRecord item = null;
             item = items.FirstOrDefault(i => i.ID == id);
 
-            // If not null, then we found the item and can remove it
             if (item != null)
             {
                 items.Remove(item);
@@ -201,12 +200,11 @@ namespace Mytemize
         // calculate how many of the entries have been set to complete and return its value
         public float checkProgress()
         {
-            if (items.Count <= 0) return 100f; // return full count if there are no entries because why would there be any progress on it?
+            if (items.Count <= 0) return 100f;
             float done = 0f;
 
             for (int i = 0; i < items.Count; i++)
             {
-                // only consider complete states as "done" - partial and incomplete should still be inc
                 if (items[i].State == RecordState.COMPLETE) done++;
             }
 

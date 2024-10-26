@@ -572,7 +572,7 @@ namespace Mytemize
                             line = line.Trim();
                             if (String.Equals(line, currentPath, StringComparison.OrdinalIgnoreCase))
                             {
-                                isPresent = true; //it's already here, no need to record
+                                isPresent = true; 
                                 break;
                             }
                         }
@@ -595,7 +595,6 @@ namespace Mytemize
         private void MZViewer_BGLoad(object sender, EventArgs e)
         {
             // Load the image with transparency
-            // Bitmap bitmap = new Bitmap("Mytemize.Resources.myzViewerBG.png");
             Bitmap bitmap = new Bitmap(imgWindowBG);
 
             // Set the layered window attribute:

@@ -161,7 +161,9 @@ namespace Mytemize
 
         }
 
-        // misc functions
+        /*
+         * misc functions
+         */
 
         // Detect if the key entered in the textbox is a number. Reject if not
         private void tb_KeyPress(object sender, KeyPressEventArgs e)
