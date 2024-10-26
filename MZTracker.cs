@@ -127,6 +127,8 @@ namespace Mytemize
             {
                 if (!String.IsNullOrEmpty(filePath))
                 {
+                    if (!File.Exists(filePath)) continue;
+
                     using (FileStream fs = File.OpenRead(filePath))
                     using (StreamReader sr = new StreamReader(fs))
                     {

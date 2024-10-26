@@ -27,7 +27,7 @@ namespace Mytemize
         // image resources
         Image imgIncomplete, imgHover, imgPartial, imgComplete, imgLate, prevImage, imgWindowBG;
         Image imgBtClose, imgBtCloseHover, imgBtCloseClicked, imgBtMini, imgBtMiniHover, imgBtMiniClicked;
-        Image[] imgBtSettings;
+        Image[] imgBtSettings, imgBtTracker;
 
         internal MZList activeFile;
         string currentPath = null, lastKnownPath = null, listFile = LISTFILE;
@@ -85,10 +85,14 @@ namespace Mytemize
             imgBtSettings[0]= loadEmbeddedImage("Mytemize.Resources.setting_button.bmp");
             imgBtSettings[1] = loadEmbeddedImage("Mytemize.Resources.setting_button_hover.bmp");
             imgBtSettings[2] = loadEmbeddedImage("Mytemize.Resources.setting_button_clicked.bmp");
+            imgBtTracker = new Image[4];
+            imgBtTracker[0] = loadEmbeddedImage("Mytemize.Resources.tracked_button_inactive.bmp");
+            imgBtTracker[1] = loadEmbeddedImage("Mytemize.Resources.tracked_button_hover.bmp");
+            imgBtTracker[2] = loadEmbeddedImage("Mytemize.Resources.tracked_button_clicked.bmp");
+            imgBtTracker[3] = loadEmbeddedImage("Mytemize.Resources.tracked_button_active.bmp");
 
             // prepare styles
             cstyleIncomplete = new DataGridViewCellStyle();
-            // cstyleIncomplete.BackColor = Color.DarkSlateGray;
             cstyleIncomplete.BackColor = Color.FromArgb(34,44,43);
             cstyleIncomplete.ForeColor = Color.White;
 
@@ -106,6 +110,11 @@ namespace Mytemize
 
             // set the grid to be unselectable
             dgvList.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+
+            toolTipForm.SetToolTip(btClose, "Close");
+            toolTipForm.SetToolTip(btMini, "Minimize");
+            toolTipForm.SetToolTip(btSettings, "Settings");
+            toolTipForm.SetToolTip(btTrackList, "Add to List Tracker");
         }
 
         // loads images from the built assembly
@@ -247,6 +256,13 @@ namespace Mytemize
                 }
             }
             if (bt == btSettings) openSettingsWindow();
+            if (bt == btTrackList)
+            {
+                isTracked = !isTracked;
+                activeFile.isTracked = isTracked;
+                saveFile();
+                updateWindowInfo();
+            }
             
         }
 
@@ -256,6 +272,7 @@ namespace Mytemize
             if (bt == btClose) btClose.BackgroundImage = imgBtCloseHover;
             if (bt == btMini) btMini.BackgroundImage = imgBtMiniHover;
             if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[1];
+            if (bt == btTrackList) btTrackList.BackgroundImage = imgBtTracker[1];
         }
 
         private void button_mouseout(Object sender, EventArgs e)
@@ -264,6 +281,11 @@ namespace Mytemize
             if (bt == btClose) btClose.BackgroundImage = imgBtClose;
             if (bt == btMini) btMini.BackgroundImage = imgBtMini;
             if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[0];
+            if (bt == btTrackList)
+            {
+                if (activeFile.isTracked) btTrackList.BackgroundImage = imgBtTracker[3];
+                else btTrackList.BackgroundImage = imgBtTracker[0];
+            }
         }
 
         private void button_mousedown(Object sender, MouseEventArgs e)
@@ -272,6 +294,8 @@ namespace Mytemize
             if (bt == btClose) btClose.BackgroundImage = imgBtCloseClicked;
             if (bt == btMini) btMini.BackgroundImage = imgBtMiniClicked;
             if (bt == btSettings) btSettings.BackgroundImage = imgBtSettings[2];
+            if (bt == btTrackList) btTrackList.BackgroundImage = imgBtTracker[2];
+
         }
 
         /*
@@ -421,6 +445,12 @@ namespace Mytemize
 
             // disable minimize button if pinToDesktop is enabled and vice versa
             btMini.Enabled = !pinToDesktop;
+
+            if (activeFile.isTracked) btTrackList.BackgroundImage = imgBtTracker[3];
+            else btTrackList.BackgroundImage = imgBtTracker[0];
+
+            if (!isTracked) toolTipForm.SetToolTip(btTrackList, "Add to List Tracker");
+            else toolTipForm.SetToolTip(btTrackList, "Remove from List Tracker");
         }
 
         // update the progress bar as needed
@@ -442,11 +472,8 @@ namespace Mytemize
                 minimizeToTray = settings.isMinToTray;
                 pinToDesktop = settings.isPinToDesktop;
                 isTracked = settings.isTracked;
-                if (isTracked != isTrackedBefore)
-                {
-                    activeFile.isTracked = isTracked;
-                    saveFile();
-                }
+                activeFile.isTracked = isTracked;
+                saveFile();
             }
             updateWindowInfo();
         }
@@ -503,7 +530,6 @@ namespace Mytemize
                 // remove the lists' path from the file
                 if (File.Exists(listFile))
                 {
-                    bool isPresent = false;
                     string linesToWrite = "";
                     // Check if the list file has the file path available, then write if not yet
                     using (FileStream fs = new FileStream(listFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -515,7 +541,7 @@ namespace Mytemize
                             line = line.Trim();
                             if (String.Equals(line, currentPath, StringComparison.OrdinalIgnoreCase))
                             {
-                                isPresent = true; // found it, now filter it out
+                                continue;
                             }
                             else linesToWrite += line + "\r\n";
                         }

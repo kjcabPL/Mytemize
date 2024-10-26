@@ -116,7 +116,7 @@ namespace Mytemize
      */
     internal class MZList
     {
-        public string title, filePath;
+        public string title;
         public List<MZRecord> items;
         public int count;
         public bool isTracked = false;
