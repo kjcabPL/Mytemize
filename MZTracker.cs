@@ -61,7 +61,7 @@ namespace Mytemize
         private void menuItemClicked(Object sender, EventArgs e)
         {
             ToolStripItem listFile = sender as ToolStripItem;
-            String filePath = listFile.Tag as String;
+            string filePath = listFile.Tag as string;
             openMytemizeList(filePath);
         }
 
@@ -143,7 +143,7 @@ namespace Mytemize
                         if (file != null)
                         {
                             ToolStripMenuItem newItem = new ToolStripMenuItem(file.Title);
-                            newItem.Tag = filePath as String;
+                            newItem.Tag = filePath;
                             newItem.Click += menuItemClicked;
                             cMenuTrackedLists.Items.Add(newItem);
                         }
@@ -174,10 +174,7 @@ namespace Mytemize
 
             try
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    Process.Start("Mytemize.exe", "-v " + filePath);
-                }
+                Process.Start("Mytemize.exe", $"-v \"{filePath}\"");
             }
             catch (IOException)
             {

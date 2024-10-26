@@ -9,14 +9,18 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mytemize Installer", "..\My
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Tracker|Any CPU = Debug Tracker|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78E44432-D481-4397-B550-8A0E26A11C89}.Debug Tracker|Any CPU.ActiveCfg = Debug Tracker|Any CPU
+		{78E44432-D481-4397-B550-8A0E26A11C89}.Debug Tracker|Any CPU.Build.0 = Debug Tracker|Any CPU
 		{78E44432-D481-4397-B550-8A0E26A11C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78E44432-D481-4397-B550-8A0E26A11C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78E44432-D481-4397-B550-8A0E26A11C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78E44432-D481-4397-B550-8A0E26A11C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FE8F46-672F-4192-807B-C700EBBC8305}.Debug Tracker|Any CPU.ActiveCfg = Debug Tracker
 		{35FE8F46-672F-4192-807B-C700EBBC8305}.Debug|Any CPU.ActiveCfg = Debug
 		{35FE8F46-672F-4192-807B-C700EBBC8305}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection

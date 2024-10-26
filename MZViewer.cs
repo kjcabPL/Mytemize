@@ -344,7 +344,7 @@ namespace Mytemize
             }
             catch (Exception err)
             {
-                MessageBox.Show("An error has occurred while reading the list: " + currentPath + ":\n " + err.Message);
+                MessageBox.Show("An error has occurred while reading the list: \r\n " + err.Message, "ERROR");
             }
         }
 
@@ -529,7 +529,7 @@ namespace Mytemize
         private void updateTrackList()
         {
             // if the list was tracked before but isn't now, then remove the file's entry from the tracker
-            if (!isTracked && isTrackedBefore)
+            if (!isTracked)
             {
                 // remove the lists' path from the file
                 if (File.Exists(listFile))
@@ -560,7 +560,7 @@ namespace Mytemize
                 else MessageBox.Show("Unable to track file - list file not found. ", "ERROR");
             }
             // if is now tracked and was not tracked before
-            else if (isTracked && !isTrackedBefore)
+            else
             {
                 // Look for the list file
                 if (File.Exists(listFile))

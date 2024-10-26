@@ -52,7 +52,7 @@ namespace Mytemize
             cbPinToDesktop.Checked = isPinToDesktop;
             cbAddToTracker.Checked = isTracked;
 
-            // if (isDemo) cbAddToTracker.Enabled = false;
+            if (isDemo) cbAddToTracker.Enabled = false;
             if (isMinToTray) cbPinToDesktop.Enabled = false;
         }
 
