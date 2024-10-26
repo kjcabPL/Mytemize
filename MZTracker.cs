@@ -74,6 +74,11 @@ namespace Mytemize
             addTrackedLists();
         }
 
+        private void updateOnFileDeleted(Object sender, FileSystemEventArgs e)
+        {
+            if (!File.Exists(envListPath)) File.WriteAllText(envListPath, "");
+        }
+
         /*
          *  Misc Operations
          */
@@ -87,6 +92,7 @@ namespace Mytemize
                 envListPath = pathCheck;
             }
 
+            if (!File.Exists(envListPath)) File.WriteAllText(envListPath, "");
             try
             {
                 using (FileStream fs = new FileStream(envListPath, FileMode.Open, FileAccess.Read, FileShare.None))
@@ -96,13 +102,11 @@ namespace Mytemize
                     listWatcher.NotifyFilter = NotifyFilters.LastWrite;
                     listWatcher.Changed += updateOnFileChanged;
                     listWatcher.Created += updateOnFileChanged;
+                    listWatcher.Deleted += updateOnFileDeleted;
                     listWatcher.EnableRaisingEvents = true;
                 }
             }
-            catch (IOException)
-            {
-                // MessageBox.Show("No List File detected. Creating one...");
-            }
+            catch (IOException) { }
         }
 
         // Add each list read from filepaths from the listfile found
@@ -144,7 +148,6 @@ namespace Mytemize
                             cMenuTrackedLists.Items.Add(newItem);
                         }
                     }
-
                 }
             }
 
