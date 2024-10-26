@@ -165,7 +165,7 @@ namespace Mytemize
             if (string.IsNullOrEmpty(filePath)) return;
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.");
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "ERROR");
                 return;
             }
 
@@ -178,7 +178,7 @@ namespace Mytemize
             }
             catch (IOException)
             {
-                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.");
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "ERROR");
             }
         }
     }

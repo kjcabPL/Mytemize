@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -16,13 +17,33 @@ namespace Mytemize
             InitializeComponent();
 
             string dateYear = DateTime.Now.Year.ToString();
-
+            string descString = "By Kevin Joseff Cabrera \r\n";
+            string linkedinString = "linkedin.com/in/kj-cabrera/";
+            string linkedinAddress = "https://www.linkedin.com/in/kj-cabrera/";
 
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct + " Listbuilder";
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + "  " + dateYear;
             this.labelCompanyName.Text = AssemblyCompany;
+            // this.labelDescription.Text = "By Kevin Joseff Cabrera \r\n";
+
+            this.labelLink.Text = descString + linkedinString;
+            this.labelLink.Links.Add(descString.Length, linkedinString.Length, linkedinAddress);
+            this.labelLink.LinkClicked += linkLabel_clicked;
+        }
+
+        private void linkLabel_clicked(Object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string address = e.Link.LinkData as string;
+            if (!string.IsNullOrEmpty(address))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = address,
+                    UseShellExecute = true
+                });
+            }
         }
 
         #region Assembly Attribute Accessors
