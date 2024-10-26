@@ -112,8 +112,7 @@ namespace Mytemize
             Button btSetting = sender as Button;
             if (btSetting == null) return;
 
-            ButtonTagData tagData = btSetting.Tag as ButtonTagData;
-            if (tagData != null) MessageBox.Show("Opening item setup for " + tagData.entryID);            
+            ButtonTagData tagData = btSetting.Tag as ButtonTagData;         
         }
 
         /*
@@ -170,7 +169,6 @@ namespace Mytemize
                 ButtonTagData tagData = dgv.Rows[e.RowIndex].Cells[COL_DESCRIPTION].Tag as ButtonTagData;
                 if (tagData != null)
                 {
-                    // MessageBox.Show("Updating Entry At: " + tagData.rowID);
                     if (activeFile != null) activeFile.getRecordById(tagData.entryID).description = dgv.Rows[e.RowIndex].Cells[COL_DESCRIPTION].Value.ToString();
                 }
             }
@@ -384,7 +382,7 @@ namespace Mytemize
             }
             catch (Exception err)
             {
-                MessageBox.Show("An error has occurred while reading the list: " + filePath + ":\n " + err.Message);
+                MessageBox.Show("Error has occurred while reading the list: " + filePath + ":\n " + err.Message, "ERROR");
             }
         }
 
@@ -397,7 +395,7 @@ namespace Mytemize
              }
             else
             {
-                MessageBox.Show("Error adding new record.", "ERROR");
+                MessageBox.Show("Error adding new record", "ERROR");
             }
         }
 
