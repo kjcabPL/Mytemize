@@ -88,6 +88,7 @@ namespace Mytemize
             if (e.KeyChar == (char)Keys.Enter)
             {
                 tbNewItem.ReadOnly = true;
+                tbNewItem.Focus();
             }
         }
 
