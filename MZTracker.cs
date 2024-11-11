@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -86,26 +87,40 @@ namespace Mytemize
         // check if a list file is present via the environment path and start tracking if it is
         private void checkListFile()
         {
+            const int retryDelay = 1000, maxRetries = 1000;
+            bool fileAccessible = false;
+            int currentRetry = 0;
+
             string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), STUDIONAME, APPNAME, LISTFILE);
             string listDir = Path.GetDirectoryName(appDataPath);
             envListPath = appDataPath;
             if (!Directory.Exists(listDir)) Directory.CreateDirectory(listDir);
             if (!File.Exists(envListPath)) File.WriteAllText(envListPath, "");
             
-            try
+            while (!fileAccessible && currentRetry < maxRetries )
             {
-                using (FileStream fs = new FileStream(envListPath, FileMode.Open, FileAccess.Read, FileShare.None))
+                try
                 {
-                    string dir = Path.GetDirectoryName(envListPath);
-                    listWatcher = new FileSystemWatcher(dir, LISTFILE);
-                    listWatcher.NotifyFilter = NotifyFilters.LastWrite;
-                    listWatcher.Changed += updateOnFileChanged;
-                    listWatcher.Created += updateOnFileChanged;
-                    listWatcher.Deleted += updateOnFileDeleted;
-                    listWatcher.EnableRaisingEvents = true;
+                    using (FileStream fs = new FileStream(envListPath, FileMode.Open, FileAccess.Read, FileShare.None))
+                    {
+                        string dir = Path.GetDirectoryName(envListPath);
+                        listWatcher = new FileSystemWatcher(dir, LISTFILE);
+                        listWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                        listWatcher.Changed += updateOnFileChanged;
+                        listWatcher.Created += updateOnFileChanged;
+                        listWatcher.Deleted += updateOnFileDeleted;
+                        listWatcher.EnableRaisingEvents = true;
+                        fileAccessible = true;
+                    }
+                }
+                catch (IOException)
+                {
+                    currentRetry++;
+                    Thread.Sleep(retryDelay);
                 }
             }
-            catch (IOException) { }
+
+            if (!fileAccessible) MessageBox.Show("Unable to open Tracker File.", "Mytemize Tracker Error");
             
         }
 
@@ -168,7 +183,7 @@ namespace Mytemize
             if (string.IsNullOrEmpty(filePath)) return;
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "ERROR");
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "Mytemize Tracker Error");
                 return;
             }
 
@@ -178,7 +193,7 @@ namespace Mytemize
             }
             catch (IOException)
             {
-                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "ERROR");
+                MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "Mytemize Tracker Error");
             }
         }
     }

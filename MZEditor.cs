@@ -84,11 +84,18 @@ namespace Mytemize
 
         private void tbNewItem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // disable the textbox after pressing enter
+            // Keep the focus in textbox after pressing enter, disable if escape
             if (e.KeyChar == (char)Keys.Enter)
             {
-                tbNewItem.ReadOnly = true;
+                tbNewItem.ReadOnly = false;
                 tbNewItem.Focus();
+                tbNewItem.Clear();
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (char)Keys.Escape)
+            {
+                tbNewItem.ReadOnly = true;
+                this.Focus();
             }
         }
 
