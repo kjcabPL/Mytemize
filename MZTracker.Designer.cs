@@ -34,6 +34,7 @@ namespace Mytemize
             this.trayTracker = new System.Windows.Forms.NotifyIcon(this.components);
             this.cMenuTrackedLists = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuCloseList = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackerTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.cMenuTrackedLists.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,9 +62,10 @@ namespace Mytemize
             // 
             // MZTracker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MZTracker";
             this.Text = "Form1";
             this.cMenuTrackedLists.ResumeLayout(false);
@@ -76,5 +78,6 @@ namespace Mytemize
         private System.Windows.Forms.NotifyIcon trayTracker;
         private System.Windows.Forms.ContextMenuStrip cMenuTrackedLists;
         private System.Windows.Forms.ToolStripMenuItem menuCloseList;
+        private System.Windows.Forms.ToolTip trackerTooltip;
     }
 }

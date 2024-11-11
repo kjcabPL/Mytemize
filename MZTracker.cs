@@ -17,7 +17,7 @@ namespace Mytemize
 {
     public partial class MZTracker : Form
     {
-        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER", STUDIONAME = "Bitknvs Studio", APPNAME = "Mytemize";
+        const string LISTFILE = "lists.txt", ENVLISTPATH = "MYZTRACKER", STUDIONAME = "Bitknvs Studio", APPNAME = "Mytemize", APPFULLNAME = "Mytemize.exe";
 
         FileSystemWatcher listWatcher;
         string envListPath = LISTFILE;
@@ -61,9 +61,32 @@ namespace Mytemize
         // Do when a context menu item except for menuClose is clicked
         private void menuItemClicked(Object sender, EventArgs e)
         {
-            ToolStripItem listFile = sender as ToolStripItem;
-            string filePath = listFile.Tag as string;
-            openMytemizeList(filePath);
+            ToolStripItem entry = sender as ToolStripItem;
+            if (entry != null)
+            {
+                string filePath = entry.Tag as string;
+                openMytemizeList(filePath);
+            }
+            else
+            {
+                MessageBox.Show("Unable to open file: filepath entry not found", "Mytemize Tracker Error");
+            }
+            
+        }
+
+        // Add a hovertext to the menu strip item manually
+        private void menuItemMouseOver(object sender, EventArgs e)
+        {
+            ToolStripItem entry = sender as ToolStripItem;
+            if (entry != null)
+            {
+                string filePath = entry.Tag as string;
+                trackerTooltip.SetToolTip(cMenuTrackedLists, filePath);
+            }
+            else
+            {
+                MessageBox.Show("Unable to open file: filepath entry not found", "Mytemize Tracker Error");
+            }
         }
 
         /*
@@ -121,7 +144,6 @@ namespace Mytemize
             }
 
             if (!fileAccessible) MessageBox.Show("Unable to open Tracker File.", "Mytemize Tracker Error");
-            
         }
 
         // Add each list read from filepaths from the listfile found
@@ -160,6 +182,7 @@ namespace Mytemize
                             ToolStripMenuItem newItem = new ToolStripMenuItem(file.Title);
                             newItem.Tag = filePath;
                             newItem.Click += menuItemClicked;
+                            newItem.MouseHover += menuItemMouseOver;
                             cMenuTrackedLists.Items.Add(newItem);
                         }
                     }
@@ -180,6 +203,8 @@ namespace Mytemize
         // Open a mytemize window for the filepath passed
         private void openMytemizeList(string filePath)
         {
+            string app = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,APPFULLNAME);
+
             if (string.IsNullOrEmpty(filePath)) return;
             if (!File.Exists(filePath))
             {
@@ -189,12 +214,15 @@ namespace Mytemize
 
             try
             {
-                Process.Start("Mytemize.exe", $"-v \"{filePath}\"");
+                Process.Start(app, $"-v \"{filePath}\"");
             }
             catch (IOException)
             {
                 MessageBox.Show("Unable to open list file: " + filePath + " - File not found.", "Mytemize Tracker Error");
             }
         }
+
+
+
     }
 }
